@@ -1,100 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>Constantin Titarenko's Blog</title>
-  <meta name="author" content="Constantin Titarenko">
-
-  
-  <meta name="description" content="Now I definitely sure that each programmer (or software developer, or software engineer, call he/she as you want) must have math background. Lack of &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="blog.titarenko.info">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
-  
-    <h2>Notes regarding software development.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:blog.titarenko.info" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
     
-      <h1 class="entry-title"><a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2012-10-05T00:00:00+03:00" pubdate data-updated="true">Oct 5<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Now I definitely sure that each programmer (or software developer, or software engineer, call he/she as you want) <strong>must</strong> have math background.</p>
+  <entry>
+    <title type="html"><![CDATA[Why Programmer Must Have Math Background]]></title>
+    <link href="blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/"/>
+    <updated>2012-10-05T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background</id>
+    <content type="html"><![CDATA[<p>Now I definitely sure that each programmer (or software developer, or software engineer, call he/she as you want) <strong>must</strong> have math background.</p>
 
 <p>Lack of analytical skills will lead to unclear, tangled, repetitious, inconsistent code.</p>
 
@@ -103,42 +27,15 @@
 <p>More depressing case is when it comes to design &ndash; you&rsquo;ll see lots of similar code snippets (with only slight differences which can be eliminated via parameterizing). Of course, even experienced developers can end up with unclear architecture, but this is definitely easier when they do not have analytical skills which are developed, I strongly believe, while doing math excercises.</p>
 
 <p>Maybe you&rsquo;ve already considered me to be Captain Obvious, but, since I still can hear from here and there: &ldquo;Why do I need to do these stupid exercises in algebra/trigonometry/differential calculus/your option instead of just learning jQuery?&rdquo; I think this post to some extent can be useful.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-17T00:00:00+03:00" pubdate data-updated="true">Jul 17<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
+  <entry>
+    <title type="html"><![CDATA[ASP.NET MVC - Preparing for Deployment]]></title>
+    <link href="blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
+    <updated>2012-07-17T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
+    <content type="html"><![CDATA[<p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
 
 <p>I found that msbuild itself allows to do packaging for deployment (but very few developers were recommending to use it for real-life deployment).</p>
 
@@ -157,42 +54,15 @@
 
 
 <p>So, for one of projects, I even didn&rsquo;t use psake and expressed everything in plain PowerShell with only dependency on 7-zip for creating zip archive and it&rsquo;s only few lines of clean and understandable code &ndash; you can look at it <a href="https://github.com/titarenko/ClientManager/blob/master/BinaryStudio.ClientManager.WebUi/Deployment/Package.ps1">here, on Github</a> (it&rsquo;s well commented, so it&rsquo;s good place to start if you haven&rsquo;t written such things before).</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-06-10T00:00:00+03:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
+  <entry>
+    <title type="html"><![CDATA[NullReferenceException from the Entity Framework Core]]></title>
+    <link href="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
+    <updated>2012-06-10T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
+    <content type="html"><![CDATA[<p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -306,42 +176,15 @@
 <p>So, summary is: don&rsquo;t fully rely on call stack investigating cause for exceptions while working with lazy evaluated things.</p>
 
 <p><em>P. S.</em> In the early beginning first thing I did was googling for stack trace. It gave me nothing but <a href="https://www.google.com.ua/search?sugexp=chrome,mod=7&amp;sourceid=chrome&amp;ie=UTF-8&amp;q=at+System.Data.Objects.ELinq.QueryParameterExpression.EvaluateParameter%28Object%5B%5D+arguments%29at+System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.GetResults%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.System.Collections.Generic.IEnumerable%3CT%3E.GetEnumerator%28%29at+System.Data.Entity.Internal.Linq.InternalQuery%601.GetEnumerator%28%29at+System.Data.Entity.Infrastructure.DbQuery%601.System.Collections.Generic.IEnumerable%3CTResult%3E.GetEnumerator%28%29at+System.Collections.Generic.List%601..ctor%28IEnumerable%601+collection%29at+System.Linq.Enumerable.ToList%5BTSource%5D%28IEnumerable%601+source%29">links to failing sites</a> and not to articles with solutions, as was expected, so I hope this post will be helpful for someone who will issue similar search query.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-22T00:00:00+03:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
+  <entry>
+    <title type="html"><![CDATA[Snapping To Grid]]></title>
+    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -357,42 +200,15 @@
 
 
 <p>So, assuming your you have an axis with step 0.5, value 10.2 will be snapped to 10 (closest node), and value 10.78, in turn, &ndash; to 11.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-22T00:00:00+03:00" pubdate data-updated="true">May 22<span>nd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>One of issues you can face when developing web application with use of ASP.NET MVC and IIS 7.5 is maximal request size. No doubt, after googling, you&rsquo;ll find that cause is request size limit, so you&rsquo;ll happily add to web.config following line and forget about this.</p>
+  <entry>
+    <title type="html"><![CDATA[ASP.NET File Upload Possible Issue]]></title>
+    <link href="blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
+    <content type="html"><![CDATA[<p>One of issues you can face when developing web application with use of ASP.NET MVC and IIS 7.5 is maximal request size. No doubt, after googling, you&rsquo;ll find that cause is request size limit, so you&rsquo;ll happily add to web.config following line and forget about this.</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='xml'><span class='line'><span class="nt">&lt;httpRuntime</span> <span class="na">maxRequestLength=</span><span class="s">&quot;100000&quot;</span><span class="nt">/&gt;</span>
@@ -415,42 +231,15 @@
 
 
 <p>For me, while working with Windows integrated authentication, this helped a lot. Thanks to <a href="http://stackoverflow.com/a/6687932">StackOverflow</a>!</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/">When IList Has Indexer but Does Not Have Enumerator</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-29T00:00:00+03:00" pubdate data-updated="true">Apr 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
+  <entry>
+    <title type="html"><![CDATA[When IList Has Indexer But Does Not Have Enumerator]]></title>
+    <link href="blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
+    <updated>2012-04-29T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
+    <content type="html"><![CDATA[<p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
 
 <p>Imagine you are implementing handler for some controller&rsquo;s action where you need to access all items from <code>ListView</code>:</p>
 
@@ -508,42 +297,15 @@
 <p>Is it so hard for framework developers to implement enumerator if type already has indexer? I think no. So it&rsquo;s very strange that we should bother ourselves with such things. But anyway the solution is not so hard, so generally everything is OK.</p>
 
 <p><em>P. S.</em> Also it&rsquo;s quite strange and unintuitive that we should access items of list view through <code>listView.CollectionSource.List</code> instead of <code>listView.List</code> or <code>listView.Items</code>, especially, when such properties do exist, but intended for another purposes (internal). But that is another story.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/04/xpath-select-node-with-child-containing-given-substring/">XPath: Select Node With Child Containing Given Substring</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-04T00:00:00+03:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>XPath is very interesting topic, essentially it allows you to do quite sophisticated things. And in this short post, I&rsquo;ll give example how to create a little more complex than plain query: it will return all books, which contains &ldquo;C++&rdquo; in any of its childrens&#8217; texts (please, see <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms762271%28v=vs.85%29.aspx">example of such XML here</a>).</p>
+  <entry>
+    <title type="html"><![CDATA[XPath: Select Node with Child Containing Given Substring]]></title>
+    <link href="blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/"/>
+    <updated>2012-04-04T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring</id>
+    <content type="html"><![CDATA[<p>XPath is very interesting topic, essentially it allows you to do quite sophisticated things. And in this short post, I&rsquo;ll give example how to create a little more complex than plain query: it will return all books, which contains &ldquo;C++&rdquo; in any of its childrens&#8217; texts (please, see <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms762271%28v=vs.85%29.aspx">example of such XML here</a>).</p>
 
 <p>So, our query is following:</p>
 
@@ -579,42 +341,15 @@
 
 
 <p>That&rsquo;s it. Simple. But useful, especially if you haven&rsquo;t worked with XPath too much before.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/04/dealing-with-namespaces-in-xpath-net/">Dealing With Namespaces in XPath (.NET)</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-04T00:00:00+03:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty prefix).</p>
+  <entry>
+    <title type="html"><![CDATA[Dealing with Namespaces in XPath (.NET)]]></title>
+    <link href="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/"/>
+    <updated>2012-04-04T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net</id>
+    <content type="html"><![CDATA[<p>This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty prefix).</p>
 
 <p>Normally, when doing queries to document <em>with namespaces</em>, you involve <code>XmlNamespaceManager</code> like this:</p>
 
@@ -683,42 +418,15 @@
 
 
 <p>Good, now it&rsquo;s OK, we&rsquo;ve got our results.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/">Extracting Tables From Microsoft Word 2007+ (OpenXML) Document</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-04-03T00:00:00+03:00" pubdate data-updated="true">Apr 3<span>rd</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let&rsquo;s suppose we have huge Word 2007+ document (*.docx) with lots of tables and we want to extract that information for further processing. Since our document is based on OpenXML format I would say &ldquo;No problem! Let&rsquo;s do it!&rdquo;.</p>
+  <entry>
+    <title type="html"><![CDATA[Extracting Tables from Microsoft Word 2007+ (OpenXML) Document]]></title>
+    <link href="blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/"/>
+    <updated>2012-04-03T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose we have huge Word 2007+ document (*.docx) with lots of tables and we want to extract that information for further processing. Since our document is based on OpenXML format I would say &ldquo;No problem! Let&rsquo;s do it!&rdquo;.</p>
 
 <p>First, we need to open zip archive (each *.docx is zipped set of XML files). For this purpose we can use great library DotNetZip (just use NuGet to obtain it). Right after this we&rsquo;ll read word/document.xml entry.</p>
 
@@ -837,42 +545,15 @@
 
 
 <p>That&rsquo;s it! Due to openness of new Word document&rsquo;s format our initial task is so simple in implementation that it takes no more than couple of hours to implement it.</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/2012/03/24/bdd-with-specflow-and-watin/">BDD With SpecFlow and WatiN</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-03-24T00:00:00+02:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I&rsquo;ve long heard about BDD, and recently viewed lectures from <a href="http://saas-class.org">SaaS class</a> really interested me not only in Ruby (with such great frameworks as Rails and Cucumber), but also in practical use of this methodology in .NET, which is my main platform at the moment. So, I decided to try writing small web app using BDD approach assisted by SpecFlow tool for definition of features and latter execution of test based on them, and WatiN as tool which would help to grab content from browser to make assertions on expected results.</p>
+  <entry>
+    <title type="html"><![CDATA[BDD with SpecFlow and WatiN]]></title>
+    <link href="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/"/>
+    <updated>2012-03-24T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve long heard about BDD, and recently viewed lectures from <a href="http://saas-class.org">SaaS class</a> really interested me not only in Ruby (with such great frameworks as Rails and Cucumber), but also in practical use of this methodology in .NET, which is my main platform at the moment. So, I decided to try writing small web app using BDD approach assisted by SpecFlow tool for definition of features and latter execution of test based on them, and WatiN as tool which would help to grab content from browser to make assertions on expected results.</p>
 
 <p>Here is the feature file:</p>
 
@@ -1015,128 +696,878 @@
 
 
 <p>Overall impressions: even if it adds some difficulties (especially at the beginning), I think it&rsquo;s great idea to practice BDD, and as for tooling: both SpecFlow and WatiN are nice and intuitive, and it cost quite low effort to get familiar with them (at least in this certain case).</p>
-</div>
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Inference of Random Value Distribution Formula]]></title>
+    <link href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
+    <updated>2012-02-29T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
+    <content type="html"><![CDATA[<p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
+
+<p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
+
+<p>So, let&rsquo;s suppose we have <code>N</code> things to happen in <code>1</code> experiment and we are running <code>K</code> experiments. What is distribution of <code>X</code> &ndash; count of certain single result appearances?</p>
+
+<p>As for me, the best way is to infer formula from simple example. Imagine, we have <code>3</code> balls in a box: <code>"1"</code>, <code>"2"</code>, <code>"3"</code>. Next, our experiment looks like this: take a ball, write its number, put it back. Given <code>4</code> experiments what results can we have?</p>
+
+<p>Let&rsquo;s write simple script to model our experiment.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">groupby</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
+</span><span class='line'><span class="n">d</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">c</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here are the results (combination itself and count of <code>"1"</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'> <span class="mi">2222</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2223</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2232</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2233</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3333</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">1222</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1223</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">1333</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2122</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2123</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3331</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1122</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1123</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1132</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3311</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1112</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1113</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1121</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3111</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1111</span><span class="p">:</span> <span class="mi">4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, let&rsquo;s start from <code>0</code> appearances. In this case combination can be composed from only <code>2</code> balls, that is <code>(N-1)</code>, since third has no appearances. OK, how much combinations we can compose from <code>2</code> balls taken <code>4</code> times? Right, <code>2^4 = 16</code>.</p>
+
+<p>Next, let&rsquo;s consider case when certain ball appears only once. Here we have slightly more complex case: we still have <code>2</code> balls and <code>3</code> positions for them, but now we can also insert third ball in the combination &ndash; <code>1xxx</code>, <code>x1xx</code> and so on. Accounting that, there are <code>C(4,1)</code> ways to do this insertion, that&rsquo;s why final count of combinations is <code>C(4,1)*2^3 = 32</code>.</p>
+
+<p>Now we have <code>2</code> appearances. This case is pretty similar to above one, but at the moment we have to pick <code>2</code> places for <code>"1"</code> and there are <code>2</code> places left for <code>"2"</code> and <code>"3"</code>. So, combinations count is <code>C(4,2)*2^2 = 24</code>.</p>
+
+<p>Next case, with <code>3</code> appearances of <code>"1"</code>, is again very similar to previous ones: we are picking <code>3</code> places for <code>"1"</code> and we have only one place for <code>"2"</code> or <code>"3"</code>. Combinations count is <code>C(4,3)*2 = 8</code>.</p>
+
+<p>Last case is the simplest one &ndash; we can have <code>4</code> appearances of <code>"1"</code> in <code>4</code> experiments only once.</p>
+
+<p>So, looking at our consideration, we can infer common formula: <code>Q(x) = C(K,x)*(N-1)^(K-x)</code>.</p>
+
+<p>Let&rsquo;s test this formula with case from Central Limit Theorem lecture. So, we have a coin and 5 flips. Due to nature of process we are expecting normal distribution. Let&rsquo;s verify that: <code>Q(x) = C(5,x)*(2-1)^(5-x) = C(5,x)</code>.</p>
+
+<p>So, our formula is correct, giving us next results:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
+  <entry>
+    <title type="html"><![CDATA[Cookie Aware WebClient (.NET)]]></title>
+    <link href="blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
+    <updated>2012-02-20T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;ve used WebClient to access protected content on some site, then you probably had dealt with <code>403</code> error <code>"Not authorized"</code>. In case if that site has used cookies for persisting of authentication state then most probable reason is that WebClient doesn&rsquo;t support managing cookies by default. However, this is a matter of few lines of code to implement the solution which is given above.</p>
 
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">/// &lt;summary&gt;</span>
+</span><span class='line'><span class="c1">/// Web client with cookies enabled.</span>
+</span><span class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">CookieAwareWebClient</span> <span class="p">:</span> <span class="n">WebClient</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">CookieContainer</span> <span class="n">container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CookieContainer</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="k">override</span> <span class="n">WebRequest</span> <span class="nf">GetWebRequest</span><span class="p">(</span><span class="n">Uri</span> <span class="n">address</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">base</span><span class="p">.</span><span class="n">GetWebRequest</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">request</span> <span class="k">is</span> <span class="n">HttpWebRequest</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="p">(</span><span class="n">request</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">).</span><span class="n">CookieContainer</span> <span class="p">=</span> <span class="n">container</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">request</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="k">override</span> <span class="n">WebResponse</span> <span class="nf">GetWebResponse</span><span class="p">(</span><span class="n">WebRequest</span> <span class="n">request</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">base</span><span class="p">.</span><span class="n">GetWebResponse</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">response</span> <span class="k">is</span> <span class="n">HttpWebResponse</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">container</span><span class="p">.</span><span class="n">Add</span><span class="p">((</span><span class="n">response</span> <span class="k">as</span> <span class="n">HttpWebResponse</span><span class="p">).</span><span class="n">Cookies</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">response</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
 
-    </article>
+]]></content>
+  </entry>
   
-  <div class="pagination">
-    
-      <a class="prev" href="/./page/2/">&larr; Older</a>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
+  <entry>
+    <title type="html"><![CDATA[What Assembly (DLL) is Missing?]]></title>
+    <link href="blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing/"/>
+    <updated>2012-02-08T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing</id>
+    <content type="html"><![CDATA[<p>Being involved into development of huge enterprise system, while working on distribution package building subsystem, I faced next problem &ndash; just deployed application crashed because of missing third-party assembly. Despite I had name of that DLL, I couldn&rsquo;t figure out what&rsquo;s wrong because exactly this DLL was present in the package.</p>
+
+<p>The possible reason for error, obviously, was some another DLL, which was required by original one. So having lots of dependencies pushed me to find right way of investigating such kind of problems &ndash; that is using of Fusion Log Viewer (<code>fuslogvw.exe</code>) which is usually located in <code>%Program Files%\Microsoft SDKs\Windows\v7.0A\Bin</code>.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvw.png" alt="Fusion Log Viewer (fuslogvw.exe)" /></p>
+
+<p>Algorithm is very clear: run viewer, clean current log, run your application and then see what is causing the problem. One note: please don&rsquo;t forget to verify your settings: &ldquo;Log bind failures to disk&rdquo; should be chosen.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvwsettings.png" alt="Fusion Log Viewer Settings" /></p>
+]]></content>
+  </entry>
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
-      </li>
-    
-      <li class="post">
-        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
-      </li>
-    
-  </ul>
-</section>
+  <entry>
+    <title type="html"><![CDATA[Useful Information In Exceptions]]></title>
+    <link href="blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
+    <content type="html"><![CDATA[<p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
 
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> For internal use.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="cp">#define __TO_STRING(what) #what</span>
+</span><span class='line'><span class="cp">#define __WHAT(message, file, line, date, time) \</span>
+</span><span class='line'><span class="cp"> message &quot; (&quot; file &quot;: &quot; __TO_STRING(line) &quot;, built at &quot; date &quot; &quot; time &quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> Throws standard exception with given message and</span>
+</span><span class='line'><span class="cm"> information about source file name, line and build date.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="cp">#define THROW_EXCEPTION(message) throw std::exception( \</span>
+</span><span class='line'><span class="cp"> __WHAT(message, __FILE__, __LINE__, __DATE__, __TIME__))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here is an example of usage of that macro.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">THROW_EXCEPTION</span><span class="p">(</span><span class="s">&quot;Error!&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case STDERR will contain next line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Error</span><span class="o">!</span> <span class="p">(</span><span class="nl">d:</span><span class="err">\</span><span class="n">projects</span><span class="err">\</span><span class="n">test</span><span class="err">\</span><span class="n">main</span><span class="p">.</span><span class="nl">cpp:</span> <span class="mi">22</span><span class="p">,</span> <span class="n">built</span> <span class="n">at</span> <span class="n">Nov</span> <span class="mi">12</span> <span class="mi">2011</span> <span class="mi">13</span><span class="o">:</span><span class="mi">51</span><span class="o">:</span><span class="mi">15</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can explicitly see where that exception was thrown, moreover &ndash; we know when build was made.</p>
+]]></content>
+  </entry>
   
-  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  <entry>
+    <title type="html"><![CDATA[Tracing C++ Code Execution]]></title>
+    <link href="blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
+    <content type="html"><![CDATA[<p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; std::endl; \</span>
+</span><span class='line'><span class="cp"> watch.restart()</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> watch.stop(); \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; \</span>
+</span><span class='line'><span class="cp"> &quot; Time: &quot; &lt;&lt; watch.getElapsedSeconds() &lt;&lt; &quot;s.&quot; &lt;&lt; std::endl</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Have you spotted that parameter <code>watch</code>? It is an instance of the following class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> Represents stopwatch for measuring code execution time.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Stopwatch</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Initializes and starts stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">Stopwatch</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Clears elapsed time value and starts stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">restart</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Stops stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">stop</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Returns number of elapsed seconds since start.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">numeric_t</span> <span class="n">getElapsedSeconds</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">private</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">clock_t</span> <span class="n">_begin</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">numeric_t</span> <span class="n">_length</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you wonder what is <code>numeric_t</code> &ndash; this is nothing but simple alias of <code>float</code>. So, lets see an example of usage (excerpt from the source code).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">TRACE_BEGIN_EX</span><span class="p">(</span><span class="s">&quot;Application started (MPI process #&quot;</span>
+</span><span class='line'>      <span class="o">&lt;&lt;</span> <span class="n">_processIndex</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;).&quot;</span><span class="p">,</span> <span class="n">_watch</span><span class="p">);</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">TRACE_END_EX</span><span class="p">(</span><span class="s">&quot;Application finished (MPI process #&quot;</span>
+</span><span class='line'>      <span class="o">&lt;&lt;</span> <span class="n">_processIndex</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;).&quot;</span><span class="p">,</span> <span class="n">_watch</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will be more useful if we&rsquo;ll introduce few new macros.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define TRACE_PREPARE \</span>
+</span><span class='line'><span class="cp"> Stopwatch __trace_stopwatch; \</span>
+</span><span class='line'><span class="cp"> std::ostringstream __trace_ostream; \</span>
+</span><span class='line'><span class="cp"> std::string __trace_subject</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what) \</span>
+</span><span class='line'><span class="cp"> __trace_ostream.str(std::string()); \</span>
+</span><span class='line'><span class="cp"> __trace_ostream &lt;&lt; what; \</span>
+</span><span class='line'><span class="cp"> __trace_subject = __trace_ostream.str(); \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN_EX(&quot;Started: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END \</span>
+</span><span class='line'><span class="cp"> TRACE_END_EX(&quot;Finished: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE(message, action) \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN(message); \</span>
+</span><span class='line'><span class="cp"> {action;} \</span>
+</span><span class='line'><span class="cp"> TRACE_END</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now we are able to write something like this (excerpt from source code of image fusion application).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">TRACE</span><span class="p">(</span><span class="s">&quot;transformation and transfer of fused image&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK, once we have compiled and run application, we can see something like this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="nl">Started:</span> <span class="n">transformation</span> <span class="n">and</span> <span class="n">transfer</span> <span class="n">of</span> <span class="n">fused</span> <span class="n">image</span><span class="p">.</span>
+</span><span class='line'><span class="nl">Finished:</span> <span class="n">transformation</span> <span class="n">and</span> <span class="n">transfer</span> <span class="n">of</span> <span class="n">fused</span> <span class="n">image</span><span class="p">.</span> <span class="nl">Time:</span> <span class="mf">0.15</span><span class="n">s</span><span class="p">.</span>
+</span><span class='line'><span class="p">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good, but what if we releasing production version and tracing no more needed? That&rsquo;s simple! Lets change our macros.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#if defined(_TRACE)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sstream&gt;</span>
+</span><span class='line'><span class="cp">#include &quot;Stopwatch.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; std::endl; \</span>
+</span><span class='line'><span class="cp"> watch.restart()</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> watch.stop(); \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; \</span>
+</span><span class='line'><span class="cp"> &quot; Time: &quot; &lt;&lt; watch.getElapsedSeconds() &lt;&lt; &quot;s.&quot; &lt;&lt; std::endl</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_PREPARE \</span>
+</span><span class='line'><span class="cp"> Stopwatch __trace_stopwatch; \</span>
+</span><span class='line'><span class="cp"> std::ostringstream __trace_ostream; \</span>
+</span><span class='line'><span class="cp"> std::string __trace_subject</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what) \</span>
+</span><span class='line'><span class="cp"> __trace_ostream.str(std::string()); \</span>
+</span><span class='line'><span class="cp"> __trace_ostream &lt;&lt; what; \</span>
+</span><span class='line'><span class="cp"> __trace_subject = __trace_ostream.str(); \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN_EX(&quot;Started: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END \</span>
+</span><span class='line'><span class="cp"> TRACE_END_EX(&quot;Finished: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE(message, action) \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN(message); \</span>
+</span><span class='line'><span class="cp"> {action;} \</span>
+</span><span class='line'><span class="cp"> TRACE_END</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#else</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch)</span>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch)</span>
+</span><span class='line'><span class="cp">#define TRACE_PREPARE</span>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what)</span>
+</span><span class='line'><span class="cp">#define TRACE_END</span>
+</span><span class='line'><span class="cp">#define TRACE(message, action) {action;}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now if we&rsquo;ll compile our code without <code>_TRACE</code> being defined, tracing simply disappears and doesn&rsquo;t have any impact on performance.</p>
+
+<p>To summarize, these simple but quite powerful macros let us easily trace our code execution (including time of execution), and at the same time we have an option to disable it by simply not defining <code>_TRACE</code> macro.</p>
+]]></content>
+  </entry>
   
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
+  <entry>
+    <title type="html"><![CDATA[CUDA Vector Implementation]]></title>
+    <link href="blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
+    <updated>2011-10-05T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2011/10/05/cuda-cuvec</id>
+    <content type="html"><![CDATA[<p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
 
-        github.showRepos({
-            user: 'titarenko',
-            count: 0,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
+<p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! vector data structure (in device memory) */</span>
+</span><span class='line'><span class="k">struct</span> <span class="n">cuvec</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="cm">/*! pointer to data */</span>
+</span><span class='line'>  <span class="n">sca</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! elements count */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! bytes taken */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">bytes</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! skip disposal */</span>
+</span><span class='line'>  <span class="kt">bool</span> <span class="n">skip</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! constructs vector with n elements */</span>
+</span><span class='line'>  <span class="n">cuvec</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">bytes</span> <span class="o">=</span> <span class="n">size</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="n">sca</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">ptr</span><span class="p">,</span> <span class="n">bytes</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">skip</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! copy constructor - disables disposal */</span>
+</span><span class='line'>  <span class="n">cuvec</span><span class="p">(</span><span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">bytes</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">bytes</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">ptr</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// disposal is disabled because resources</span>
+</span><span class='line'>      <span class="c1">// were allocated by another instance, so</span>
+</span><span class='line'>      <span class="c1">// management of them is not our responsibility</span>
+</span><span class='line'>      <span class="n">skip</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! performs disposal if allowed */</span>
+</span><span class='line'>  <span class="o">~</span><span class="n">cuvec</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">skip</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">dispose</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! performs disposal */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">dispose</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">ptr</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">bytes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>Probably, you&rsquo;ve noticed some unknown symbols like <code>sca</code> and <code>CUCHEK</code>. Here they are.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! scalar type */</span>
+</span><span class='line'><span class="k">typedef</span> <span class="kt">float</span> <span class="n">sca</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! vector data structure (in host memory) */</span>
+</span><span class='line'><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">sca</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! throws exception with error message if something went wrong */</span>
+</span><span class='line'><span class="cp">#define CUCHECK(x) if ((x) != cudaSuccess) \</span>
+</span><span class='line'><span class="cp"> throw std::exception(cudaGetErrorString(cudaGetLastError()))</span>
+</span></code></pre></td></tr></table></div></figure>
 
 
+<p>It feels like something is missing! Definitely, it&rsquo;s time for memory transfers from host to device and vice versa!</p>
 
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! copies data from device to host */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">vec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMemcpy</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">to</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span>
+</span><span class='line'>      <span class="n">from</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">cudaMemcpyDeviceToHost</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from host to device */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">,</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMemcpy</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">to</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+</span><span class='line'>      <span class="n">to</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from host to device */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="o">&gt;&gt;</span> <span class="n">to</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from device to host */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">,</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">to</span> <span class="o">&lt;&lt;</span> <span class="n">from</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK, now we are ready to test this infrastructure. We are going further with little example of usage. Let&rsquo;s suppose we want&hellip; yes, add two arrays! :)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">__global__</span> <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="n">cuvec</span> <span class="n">a</span><span class="p">,</span> <span class="n">cuvec</span> <span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">a</span><span class="p">.</span><span class="n">ptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">b</span><span class="p">.</span><span class="n">ptr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">execute</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">vec</span> <span class="n">ha</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">vec</span> <span class="n">hb</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">ha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">hb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">cuvec</span> <span class="n">a</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">cuvec</span> <span class="n">b</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">ha</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">hb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaGetLastError</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">ha</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">execute</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think this code is more readable and easier to write and maintain, than that one which uses a bunch of <code>cudaMalloc</code>, <code>cudaFree</code> and <code>cudaMemcpy</code>.
+One more advantage of <code>cuvec</code> is kind of smart disposal. Probably, you&rsquo;ve spotted that data is passed to <code>add</code> kernel by value, not by reference (this is restricted) or by pointer (this is not correct). So, destructor of <code>cuvec</code> will be called several times, but we need only one disposal right at the end of the execution, and this happens right as expected.</p>
+]]></content>
+  </entry>
   
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Constantin Titarenko -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-<script type="text/javascript">
-      var disqus_shortname = 'titarenko-blog';
-      
-        
-        var disqus_script = 'count.js';
-      
-    (function () {
-      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    }());
-</script>
-
-
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

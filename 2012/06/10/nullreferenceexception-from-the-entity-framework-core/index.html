@@ -1,0 +1,383 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>NullReferenceException from the Entity Framework Core - Constantin Titarenko's Blog</title>
+  <meta name="author" content="Constantin Titarenko">
+
+  
+  <meta name="description" content="Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: "Object reference not set to an instance of &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
+  
+    <h2>Notes regarding software development.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.titarenko.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">NullReferenceException From the Entity Framework Core</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T00:00:00+03:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="n">ActionResult</span> <span class="nf">Index</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nf">View</span><span class="p">(</span><span class="n">repository</span><span class="p">.</span><span class="n">Query</span><span class="p">&lt;</span><span class="n">Story</span><span class="p">&gt;().</span><span class="n">ToList</span><span class="p">());</span>
+</span><span class='line'>    <span class="c1">// repository.Query&lt;Story&gt;() here is nothing but (DbQuery&lt;Story&gt;) context.Stories</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here is the stack trace:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[NullReferenceException: Object reference not set to an instance of an object.]</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Objects</span><span class="p">.</span><span class="n">ELinq</span><span class="p">.</span><span class="n">QueryParameterExpression</span><span class="p">.</span><span class="n">EvaluateParameter</span><span class="p">(</span><span class="n">Object</span><span class="p">[]</span> <span class="n">arguments</span><span class="p">)</span> <span class="p">+</span><span class="m">83</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Objects</span><span class="p">.</span><span class="n">ELinq</span><span class="p">.</span><span class="n">ELinqQueryState</span><span class="p">.</span><span class="n">GetExecutionPlan</span><span class="p">(</span><span class="n">Nullable</span><span class="err">`</span><span class="m">1</span> <span class="n">forMergeOption</span><span class="p">)</span> <span class="p">+</span><span class="m">779</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Objects</span><span class="p">.</span><span class="n">ObjectQuery</span><span class="err">`</span><span class="m">1.</span><span class="n">GetResults</span><span class="p">(</span><span class="n">Nullable</span><span class="err">`</span><span class="m">1</span> <span class="n">forMergeOption</span><span class="p">)</span> <span class="p">+</span><span class="m">149</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Objects</span><span class="p">.</span><span class="n">ObjectQuery</span><span class="err">`</span><span class="m">1.</span><span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Generic</span><span class="p">.</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;.</span><span class="n">GetEnumerator</span><span class="p">()</span> <span class="p">+</span><span class="m">44</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Entity</span><span class="p">.</span><span class="n">Internal</span><span class="p">.</span><span class="n">Linq</span><span class="p">.</span><span class="n">InternalQuery</span><span class="err">`</span><span class="m">1.</span><span class="n">GetEnumerator</span><span class="p">()</span> <span class="p">+</span><span class="m">40</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Data</span><span class="p">.</span><span class="n">Entity</span><span class="p">.</span><span class="n">Infrastructure</span><span class="p">.</span><span class="n">DbQuery</span><span class="err">`</span><span class="m">1.</span><span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Generic</span><span class="p">.</span><span class="n">IEnumerable</span><span class="p">&lt;</span><span class="n">TResult</span><span class="p">&gt;.</span><span class="n">GetEnumerator</span><span class="p">()</span> <span class="p">+</span><span class="m">40</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Collections</span><span class="p">.</span><span class="n">Generic</span><span class="p">.</span><span class="n">List</span><span class="err">`</span><span class="m">1.</span><span class="p">.</span><span class="n">ctor</span><span class="p">(</span><span class="n">IEnumerable</span><span class="err">`</span><span class="m">1</span> <span class="n">collection</span><span class="p">)</span> <span class="p">+</span><span class="m">315</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Linq</span><span class="p">.</span><span class="n">Enumerable</span><span class="p">.</span><span class="n">ToList</span><span class="p">(</span><span class="n">IEnumerable</span><span class="err">`</span><span class="m">1</span> <span class="n">source</span><span class="p">)</span> <span class="p">+</span><span class="m">58</span>
+</span><span class='line'>   <span class="n">QTeam</span><span class="p">.</span><span class="n">PlanningBoard</span><span class="p">.</span><span class="n">Controllers</span><span class="p">.</span><span class="n">StoriesController</span><span class="p">.</span><span class="n">Index</span><span class="p">()</span> <span class="k">in</span> <span class="p">...</span><span class="n">QTeam</span><span class="p">.</span><span class="n">PlanningBoard</span><span class="err">\</span><span class="n">Controllers</span><span class="err">\</span><span class="n">StoriesController</span><span class="p">.</span><span class="n">cs</span><span class="p">:</span><span class="m">26</span>
+</span><span class='line'>   <span class="n">lambda_method</span><span class="p">(</span><span class="n">Closure</span> <span class="p">,</span> <span class="n">ControllerBase</span> <span class="p">,</span> <span class="n">Object</span><span class="p">[]</span> <span class="p">)</span> <span class="p">+</span><span class="m">97</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ActionMethodDispatcher</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">ControllerBase</span> <span class="n">controller</span><span class="p">,</span> <span class="n">Object</span><span class="p">[]</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">+</span><span class="m">17</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ReflectedActionDescriptor</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">ControllerContext</span> <span class="n">controllerContext</span><span class="p">,</span> <span class="n">IDictionary</span><span class="err">`</span><span class="m">2</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">+</span><span class="m">208</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerActionInvoker</span><span class="p">.</span><span class="n">InvokeActionMethod</span><span class="p">(</span><span class="n">ControllerContext</span> <span class="n">controllerContext</span><span class="p">,</span> <span class="n">ActionDescriptor</span> <span class="n">actionDescriptor</span><span class="p">,</span> <span class="n">IDictionary</span><span class="err">`</span><span class="m">2</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">+</span><span class="m">27</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClass15</span><span class="p">.&lt;</span><span class="n">InvokeActionMethodWithFilters</span><span class="p">&gt;</span><span class="n">b__12</span><span class="p">()</span> <span class="p">+</span><span class="m">55</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerActionInvoker</span><span class="p">.</span><span class="n">InvokeActionMethodFilter</span><span class="p">(</span><span class="n">IActionFilter</span> <span class="n">filter</span><span class="p">,</span> <span class="n">ActionExecutingContext</span> <span class="n">preContext</span><span class="p">,</span> <span class="n">Func</span><span class="err">`</span><span class="m">1</span> <span class="n">continuation</span><span class="p">)</span> <span class="p">+</span><span class="m">263</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClass17</span><span class="p">.&lt;</span><span class="n">InvokeActionMethodWithFilters</span><span class="p">&gt;</span><span class="n">b__14</span><span class="p">()</span> <span class="p">+</span><span class="m">19</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerActionInvoker</span><span class="p">.</span><span class="n">InvokeActionMethodWithFilters</span><span class="p">(</span><span class="n">ControllerContext</span> <span class="n">controllerContext</span><span class="p">,</span> <span class="n">IList</span><span class="err">`</span><span class="m">1</span> <span class="n">filters</span><span class="p">,</span> <span class="n">ActionDescriptor</span> <span class="n">actionDescriptor</span><span class="p">,</span> <span class="n">IDictionary</span><span class="err">`</span><span class="m">2</span> <span class="n">parameters</span><span class="p">)</span> <span class="p">+</span><span class="m">191</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerActionInvoker</span><span class="p">.</span><span class="n">InvokeAction</span><span class="p">(</span><span class="n">ControllerContext</span> <span class="n">controllerContext</span><span class="p">,</span> <span class="n">String</span> <span class="n">actionName</span><span class="p">)</span> <span class="p">+</span><span class="m">343</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">Controller</span><span class="p">.</span><span class="n">ExecuteCore</span><span class="p">()</span> <span class="p">+</span><span class="m">116</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerBase</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">RequestContext</span> <span class="n">requestContext</span><span class="p">)</span> <span class="p">+</span><span class="m">97</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">ControllerBase</span><span class="p">.</span><span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">IController</span><span class="p">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">RequestContext</span> <span class="n">requestContext</span><span class="p">)</span> <span class="p">+</span><span class="m">10</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClassb</span><span class="p">.&lt;</span><span class="n">BeginProcessRequest</span><span class="p">&gt;</span><span class="n">b__5</span><span class="p">()</span> <span class="p">+</span><span class="m">37</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">Async</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClass1</span><span class="p">.&lt;</span><span class="n">MakeVoidDelegate</span><span class="p">&gt;</span><span class="n">b__0</span><span class="p">()</span> <span class="p">+</span><span class="m">21</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">Async</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClass8</span><span class="err">`</span><span class="m">1.</span><span class="p">&lt;</span><span class="n">BeginSynchronous</span><span class="p">&gt;</span><span class="n">b__7</span><span class="p">(</span><span class="n">IAsyncResult</span> <span class="n">_</span><span class="p">)</span> <span class="p">+</span><span class="m">12</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">Async</span><span class="p">.</span><span class="n">WrappedAsyncResult</span><span class="err">`</span><span class="m">1.</span><span class="n">End</span><span class="p">()</span> <span class="p">+</span><span class="m">62</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.&lt;&gt;</span><span class="n">c__DisplayClasse</span><span class="p">.&lt;</span><span class="n">EndProcessRequest</span><span class="p">&gt;</span><span class="n">b__d</span><span class="p">()</span> <span class="p">+</span><span class="m">50</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">SecurityUtil</span><span class="p">.&lt;</span><span class="n">GetCallInAppTrustThunk</span><span class="p">&gt;</span><span class="n">b__0</span><span class="p">(</span><span class="n">Action</span> <span class="n">f</span><span class="p">)</span> <span class="p">+</span><span class="m">7</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">SecurityUtil</span><span class="p">.</span><span class="n">ProcessInApplicationTrust</span><span class="p">(</span><span class="n">Action</span> <span class="n">action</span><span class="p">)</span> <span class="p">+</span><span class="m">22</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">MvcHandler</span><span class="p">.</span><span class="n">EndProcessRequest</span><span class="p">(</span><span class="n">IAsyncResult</span> <span class="n">asyncResult</span><span class="p">)</span> <span class="p">+</span><span class="m">60</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">Mvc</span><span class="p">.</span><span class="n">MvcHandler</span><span class="p">.</span><span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">IHttpAsyncHandler</span><span class="p">.</span><span class="n">EndProcessRequest</span><span class="p">(</span><span class="n">IAsyncResult</span> <span class="n">result</span><span class="p">)</span> <span class="p">+</span><span class="m">9</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">CallHandlerExecutionStep</span><span class="p">.</span><span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">HttpApplication</span><span class="p">.</span><span class="n">IExecutionStep</span><span class="p">.</span><span class="n">Execute</span><span class="p">()</span> <span class="p">+</span><span class="m">8970061</span>
+</span><span class='line'>   <span class="n">System</span><span class="p">.</span><span class="n">Web</span><span class="p">.</span><span class="n">HttpApplication</span><span class="p">.</span><span class="n">ExecuteStep</span><span class="p">(</span><span class="n">IExecutionStep</span> <span class="n">step</span><span class="p">,</span> <span class="n">Boolean</span><span class="p">&amp;</span> <span class="n">completedSynchronously</span><span class="p">)</span> <span class="p">+</span><span class="m">184</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Reading such stack trace can mislead you that cause is not in app code but somewhere in the EF itself. This is because lazy enumeration &ndash; after a little bit deeper analysis I found that I have such code:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">/// &lt;summary&gt;</span>
+</span><span class='line'><span class="c1">/// Queries data for current tenant.</span>
+</span><span class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</span><span class='line'><span class="k">private</span> <span class="n">IQueryable</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">QueryFilteredInternal</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="k">params</span> <span class="n">Expression</span><span class="p">&lt;</span><span class="n">Func</span><span class="p">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="kt">object</span><span class="p">&gt;&gt;[]</span> <span class="n">eagerlyLoadedProperties</span><span class="p">)</span> <span class="k">where</span> <span class="n">T</span> <span class="p">:</span> <span class="n">class</span><span class="p">,</span> <span class="n">IIdentifiable</span><span class="p">,</span> <span class="n">IOwned</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="n">repository</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Query</span><span class="p">(</span><span class="n">eagerlyLoadedProperties</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">OwnerId</span> <span class="p">==</span> <span class="n">userService</span><span class="p">.</span><span class="n">CurrentUser</span><span class="p">.</span><span class="n">Id</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Here <code>userService.CurrentUser</code> was null, so when EF tried to access <code>userService.CurrentUser.Id</code> for providing parameter value to query, <code>NullReferenceException</code> was occuring.</p>
+
+<p>So, summary is: don&rsquo;t fully rely on call stack investigating cause for exceptions while working with lazy evaluated things.</p>
+
+<p><em>P. S.</em> In the early beginning first thing I did was googling for stack trace. It gave me nothing but <a href="https://www.google.com.ua/search?sugexp=chrome,mod=7&amp;sourceid=chrome&amp;ie=UTF-8&amp;q=at+System.Data.Objects.ELinq.QueryParameterExpression.EvaluateParameter%28Object%5B%5D+arguments%29at+System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.GetResults%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.System.Collections.Generic.IEnumerable%3CT%3E.GetEnumerator%28%29at+System.Data.Entity.Internal.Linq.InternalQuery%601.GetEnumerator%28%29at+System.Data.Entity.Infrastructure.DbQuery%601.System.Collections.Generic.IEnumerable%3CTResult%3E.GetEnumerator%28%29at+System.Collections.Generic.List%601..ctor%28IEnumerable%601+collection%29at+System.Linq.Enumerable.ToList%5BTSource%5D%28IEnumerable%601+source%29">links to failing sites</a> and not to articles with solutions, as was expected, so I hope this post will be helpful for someone who will issue similar search query.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Constantin Titarenko</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-10T00:00:00+03:00" pubdate data-updated="true">Jun 10<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/dot-net/'>.NET</a>, <a class='category' href='/categories/orm/'>ORM</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/" data-via="ctitarenko" data-counturl="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/05/22/snapping-to-grid/" title="Previous Post: Snapping To Grid">&laquo; Snapping To Grid</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/07/17/asp-net-mvc-preparing-for-deployment/" title="Next Post: ASP.NET MVC - Preparing for Deployment">ASP.NET MVC - Preparing for Deployment &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'titarenko',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Constantin Titarenko -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'titarenko-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/';
+        var disqus_url = 'blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

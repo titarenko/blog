@@ -1,0 +1,338 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Dealing with Namespaces in XPath (.NET) - Constantin Titarenko's Blog</title>
+  <meta name="author" content="Constantin Titarenko">
+
+  
+  <meta name="description" content="This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
+  
+    <h2>Notes regarding software development.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.titarenko.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Dealing With Namespaces in XPath (.NET)</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-04T00:00:00+03:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty prefix).</p>
+
+<p>Normally, when doing queries to document <em>with namespaces</em>, you involve <code>XmlNamespaceManager</code> like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="kt">var</span> <span class="n">namespaceManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">XmlNamespaceManager</span><span class="p">(</span><span class="n">document</span><span class="p">.</span><span class="n">NameTable</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">var</span> <span class="n">namespaces</span> <span class="p">=</span> <span class="n">document</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">DocumentElement</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Attributes</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Cast</span><span class="p">&lt;</span><span class="n">XmlAttribute</span><span class="p">&gt;()</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">StartsWith</span><span class="p">(</span><span class="s">&quot;xmlns&quot;</span><span class="p">))</span>
+</span><span class='line'>    <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">x</span> <span class="p">=&gt;</span> <span class="k">new</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">Prefix</span> <span class="p">=</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">5</span>
+</span><span class='line'>                            <span class="p">?</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">6</span><span class="p">)</span> <span class="c1">// case when name is like &quot;xmlns:something&quot;</span>
+</span><span class='line'>                            <span class="p">:</span> <span class="kt">string</span><span class="p">.</span><span class="n">Empty</span><span class="p">,</span> <span class="c1">// case when name is &quot;xmlns&quot; - default namespace</span>
+</span><span class='line'>            <span class="n">Uri</span> <span class="p">=</span> <span class="n">x</span><span class="p">.</span><span class="n">Value</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">ns</span> <span class="k">in</span> <span class="n">namespaces</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">namespaceManager</span><span class="p">.</span><span class="n">AddNamespace</span><span class="p">(</span><span class="n">ns</span><span class="p">.</span><span class="n">Prefix</span><span class="p">,</span> <span class="n">ns</span><span class="p">.</span><span class="n">Uri</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">var</span> <span class="n">nodes</span> <span class="p">=</span> <span class="n">document</span><span class="p">.</span><span class="n">SelectNodes</span><span class="p">(</span><span class="s">&quot;//node/subnode&quot;</span><span class="p">,</span> <span class="n">namespaceManager</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>But wait! This query <em>will return no results</em>! The reason is not so obvious: you <em>must use prefix for default namespace</em>, it can&rsquo;t be omitted! So, to make such queries working, we need to change the initial code as well as XPath query:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="p">...</span>
+</span><span class='line'>            <span class="n">Prefix</span> <span class="p">=</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Length</span> <span class="p">&gt;</span> <span class="m">5</span>
+</span><span class='line'>                            <span class="p">?</span> <span class="n">x</span><span class="p">.</span><span class="n">Name</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="m">6</span><span class="p">)</span> <span class="c1">// case when name is like &quot;xmlns:something&quot;</span>
+</span><span class='line'>                            <span class="p">:</span> <span class="s">&quot;default&quot;</span><span class="p">,</span> <span class="c1">// case when name is &quot;xmlns&quot; - default namespace</span>
+</span><span class='line'>            <span class="n">Uri</span> <span class="p">=</span> <span class="n">x</span><span class="p">.</span><span class="n">Value</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">nodes</span> <span class="p">=</span> <span class="n">document</span><span class="p">.</span><span class="n">SelectNodes</span><span class="p">(</span><span class="s">&quot;//default:node/default:subnode&quot;</span><span class="p">,</span> <span class="n">namespaceManager</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good, now it&rsquo;s OK, we&rsquo;ve got our results.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Constantin Titarenko</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-04T00:00:00+03:00" pubdate data-updated="true">Apr 4<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/dot-net/'>.NET</a>, <a class='category' href='/categories/xpath/'>XPath</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/" data-via="ctitarenko" data-counturl="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/" title="Previous Post: Extracting Tables from Microsoft Word 2007+ (OpenXML) Document">&laquo; Extracting Tables from Microsoft Word 2007+ (OpenXML) Document</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/04/04/xpath-select-node-with-child-containing-given-substring/" title="Next Post: XPath: Select Node with Child Containing Given Substring">XPath: Select Node with Child Containing Given Substring &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'titarenko',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Constantin Titarenko -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'titarenko-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/';
+        var disqus_url = 'blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

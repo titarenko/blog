@@ -1,0 +1,1219 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Constantin Titarenko's Blog</title>
+  <meta name="author" content="Constantin Titarenko">
+
+  
+  <meta name="description" content="This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math. Watching Central Limit Theorem lecture ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="blog.titarenko.info/./page/2">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
+  
+    <h2>Notes regarding software development.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.titarenko.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div class="blog-index">
+  
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/29/inference-of-random-value-distribution-formula/">Inference of Random Value Distribution Formula</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-29T00:00:00+02:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
+
+<p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
+
+<p>So, let&rsquo;s suppose we have <code>N</code> things to happen in <code>1</code> experiment and we are running <code>K</code> experiments. What is distribution of <code>X</code> &ndash; count of certain single result appearances?</p>
+
+<p>As for me, the best way is to infer formula from simple example. Imagine, we have <code>3</code> balls in a box: <code>"1"</code>, <code>"2"</code>, <code>"3"</code>. Next, our experiment looks like this: take a ball, write its number, put it back. Given <code>4</code> experiments what results can we have?</p>
+
+<p>Let&rsquo;s write simple script to model our experiment.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">groupby</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
+</span><span class='line'><span class="n">d</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">c</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here are the results (combination itself and count of <code>"1"</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'> <span class="mi">2222</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2223</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2232</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2233</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3333</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">1222</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1223</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">1333</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2122</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2123</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3331</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1122</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1123</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1132</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3311</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1112</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1113</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1121</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3111</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1111</span><span class="p">:</span> <span class="mi">4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, let&rsquo;s start from <code>0</code> appearances. In this case combination can be composed from only <code>2</code> balls, that is <code>(N-1)</code>, since third has no appearances. OK, how much combinations we can compose from <code>2</code> balls taken <code>4</code> times? Right, <code>2^4 = 16</code>.</p>
+
+<p>Next, let&rsquo;s consider case when certain ball appears only once. Here we have slightly more complex case: we still have <code>2</code> balls and <code>3</code> positions for them, but now we can also insert third ball in the combination &ndash; <code>1xxx</code>, <code>x1xx</code> and so on. Accounting that, there are <code>C(4,1)</code> ways to do this insertion, that&rsquo;s why final count of combinations is <code>C(4,1)*2^3 = 32</code>.</p>
+
+<p>Now we have <code>2</code> appearances. This case is pretty similar to above one, but at the moment we have to pick <code>2</code> places for <code>"1"</code> and there are <code>2</code> places left for <code>"2"</code> and <code>"3"</code>. So, combinations count is <code>C(4,2)*2^2 = 24</code>.</p>
+
+<p>Next case, with <code>3</code> appearances of <code>"1"</code>, is again very similar to previous ones: we are picking <code>3</code> places for <code>"1"</code> and we have only one place for <code>"2"</code> or <code>"3"</code>. Combinations count is <code>C(4,3)*2 = 8</code>.</p>
+
+<p>Last case is the simplest one &ndash; we can have <code>4</code> appearances of <code>"1"</code> in <code>4</code> experiments only once.</p>
+
+<p>So, looking at our consideration, we can infer common formula: <code>Q(x) = C(K,x)*(N-1)^(K-x)</code>.</p>
+
+<p>Let&rsquo;s test this formula with case from Central Limit Theorem lecture. So, we have a coin and 5 flips. Due to nature of process we are expecting normal distribution. Let&rsquo;s verify that: <code>Q(x) = C(5,x)*(2-1)^(5-x) = C(5,x)</code>.</p>
+
+<p>So, our formula is correct, giving us next results:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/20/cookie-aware-webclient-net/">Cookie Aware WebClient (.NET)</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-20T00:00:00+02:00" pubdate data-updated="true">Feb 20<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>If you&rsquo;ve used WebClient to access protected content on some site, then you probably had dealt with <code>403</code> error <code>"Not authorized"</code>. In case if that site has used cookies for persisting of authentication state then most probable reason is that WebClient doesn&rsquo;t support managing cookies by default. However, this is a matter of few lines of code to implement the solution which is given above.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="c1">/// &lt;summary&gt;</span>
+</span><span class='line'><span class="c1">/// Web client with cookies enabled.</span>
+</span><span class='line'><span class="c1">/// &lt;/summary&gt;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">CookieAwareWebClient</span> <span class="p">:</span> <span class="n">WebClient</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">private</span> <span class="k">readonly</span> <span class="n">CookieContainer</span> <span class="n">container</span> <span class="p">=</span> <span class="k">new</span> <span class="n">CookieContainer</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="k">override</span> <span class="n">WebRequest</span> <span class="nf">GetWebRequest</span><span class="p">(</span><span class="n">Uri</span> <span class="n">address</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">request</span> <span class="p">=</span> <span class="k">base</span><span class="p">.</span><span class="n">GetWebRequest</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">request</span> <span class="k">is</span> <span class="n">HttpWebRequest</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="p">(</span><span class="n">request</span> <span class="k">as</span> <span class="n">HttpWebRequest</span><span class="p">).</span><span class="n">CookieContainer</span> <span class="p">=</span> <span class="n">container</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">request</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">protected</span> <span class="k">override</span> <span class="n">WebResponse</span> <span class="nf">GetWebResponse</span><span class="p">(</span><span class="n">WebRequest</span> <span class="n">request</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="kt">var</span> <span class="n">response</span> <span class="p">=</span> <span class="k">base</span><span class="p">.</span><span class="n">GetWebResponse</span><span class="p">(</span><span class="n">request</span><span class="p">);</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="n">response</span> <span class="k">is</span> <span class="n">HttpWebResponse</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">{</span>
+</span><span class='line'>            <span class="n">container</span><span class="p">.</span><span class="n">Add</span><span class="p">((</span><span class="n">response</span> <span class="k">as</span> <span class="n">HttpWebResponse</span><span class="p">).</span><span class="n">Cookies</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">return</span> <span class="n">response</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2012/02/08/what-assembly-dll-is-missing/">What Assembly (DLL) Is Missing?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-08T00:00:00+02:00" pubdate data-updated="true">Feb 8<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Being involved into development of huge enterprise system, while working on distribution package building subsystem, I faced next problem &ndash; just deployed application crashed because of missing third-party assembly. Despite I had name of that DLL, I couldn&rsquo;t figure out what&rsquo;s wrong because exactly this DLL was present in the package.</p>
+
+<p>The possible reason for error, obviously, was some another DLL, which was required by original one. So having lots of dependencies pushed me to find right way of investigating such kind of problems &ndash; that is using of Fusion Log Viewer (<code>fuslogvw.exe</code>) which is usually located in <code>%Program Files%\Microsoft SDKs\Windows\v7.0A\Bin</code>.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvw.png" alt="Fusion Log Viewer (fuslogvw.exe)" /></p>
+
+<p>Algorithm is very clear: run viewer, clean current log, run your application and then see what is causing the problem. One note: please don&rsquo;t forget to verify your settings: &ldquo;Log bind failures to disk&rdquo; should be chosen.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvwsettings.png" alt="Fusion Log Viewer Settings" /></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/11/12/useful-info-inexceptions/">Useful Information in Exceptions</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-12T00:00:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> For internal use.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="cp">#define __TO_STRING(what) #what</span>
+</span><span class='line'><span class="cp">#define __WHAT(message, file, line, date, time) \</span>
+</span><span class='line'><span class="cp"> message &quot; (&quot; file &quot;: &quot; __TO_STRING(line) &quot;, built at &quot; date &quot; &quot; time &quot;)&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> Throws standard exception with given message and</span>
+</span><span class='line'><span class="cm"> information about source file name, line and build date.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="cp">#define THROW_EXCEPTION(message) throw std::exception( \</span>
+</span><span class='line'><span class="cp"> __WHAT(message, __FILE__, __LINE__, __DATE__, __TIME__))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here is an example of usage of that macro.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">THROW_EXCEPTION</span><span class="p">(</span><span class="s">&quot;Error!&quot;</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span><span class="p">(</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">exception</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In this case STDERR will contain next line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">Error</span><span class="o">!</span> <span class="p">(</span><span class="nl">d:</span><span class="err">\</span><span class="n">projects</span><span class="err">\</span><span class="n">test</span><span class="err">\</span><span class="n">main</span><span class="p">.</span><span class="nl">cpp:</span> <span class="mi">22</span><span class="p">,</span> <span class="n">built</span> <span class="n">at</span> <span class="n">Nov</span> <span class="mi">12</span> <span class="mi">2011</span> <span class="mi">13</span><span class="o">:</span><span class="mi">51</span><span class="o">:</span><span class="mi">15</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now we can explicitly see where that exception was thrown, moreover &ndash; we know when build was made.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/11/12/tracing-of-c-code-execution/">Tracing C++ Code Execution</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-12T00:00:00+02:00" pubdate data-updated="true">Nov 12<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; std::endl; \</span>
+</span><span class='line'><span class="cp"> watch.restart()</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> watch.stop(); \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; \</span>
+</span><span class='line'><span class="cp"> &quot; Time: &quot; &lt;&lt; watch.getElapsedSeconds() &lt;&lt; &quot;s.&quot; &lt;&lt; std::endl</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Have you spotted that parameter <code>watch</code>? It is an instance of the following class.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*!</span>
+</span><span class='line'><span class="cm"> Represents stopwatch for measuring code execution time.</span>
+</span><span class='line'><span class="cm">*/</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Stopwatch</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">public</span><span class="o">:</span>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Initializes and starts stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">Stopwatch</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Clears elapsed time value and starts stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">restart</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Stops stopwatch.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">stop</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*!</span>
+</span><span class='line'><span class="cm">     Returns number of elapsed seconds since start.</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>  <span class="n">numeric_t</span> <span class="n">getElapsedSeconds</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">private</span><span class="o">:</span>
+</span><span class='line'>  <span class="n">clock_t</span> <span class="n">_begin</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">numeric_t</span> <span class="n">_length</span><span class="p">;</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you wonder what is <code>numeric_t</code> &ndash; this is nothing but simple alias of <code>float</code>. So, lets see an example of usage (excerpt from the source code).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">TRACE_BEGIN_EX</span><span class="p">(</span><span class="s">&quot;Application started (MPI process #&quot;</span>
+</span><span class='line'>      <span class="o">&lt;&lt;</span> <span class="n">_processIndex</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;).&quot;</span><span class="p">,</span> <span class="n">_watch</span><span class="p">);</span>
+</span><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="n">TRACE_END_EX</span><span class="p">(</span><span class="s">&quot;Application finished (MPI process #&quot;</span>
+</span><span class='line'>      <span class="o">&lt;&lt;</span> <span class="n">_processIndex</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;).&quot;</span><span class="p">,</span> <span class="n">_watch</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It will be more useful if we&rsquo;ll introduce few new macros.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#define TRACE_PREPARE \</span>
+</span><span class='line'><span class="cp"> Stopwatch __trace_stopwatch; \</span>
+</span><span class='line'><span class="cp"> std::ostringstream __trace_ostream; \</span>
+</span><span class='line'><span class="cp"> std::string __trace_subject</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what) \</span>
+</span><span class='line'><span class="cp"> __trace_ostream.str(std::string()); \</span>
+</span><span class='line'><span class="cp"> __trace_ostream &lt;&lt; what; \</span>
+</span><span class='line'><span class="cp"> __trace_subject = __trace_ostream.str(); \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN_EX(&quot;Started: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END \</span>
+</span><span class='line'><span class="cp"> TRACE_END_EX(&quot;Finished: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE(message, action) \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN(message); \</span>
+</span><span class='line'><span class="cp"> {action;} \</span>
+</span><span class='line'><span class="cp"> TRACE_END</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now we are able to write something like this (excerpt from source code of image fusion application).</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">TRACE</span><span class="p">(</span><span class="s">&quot;transformation and transfer of fused image&quot;</span><span class="p">,</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">saveChannel</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+</span><span class='line'><span class="p">});</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK, once we have compiled and run application, we can see something like this.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="p">...</span>
+</span><span class='line'><span class="nl">Started:</span> <span class="n">transformation</span> <span class="n">and</span> <span class="n">transfer</span> <span class="n">of</span> <span class="n">fused</span> <span class="n">image</span><span class="p">.</span>
+</span><span class='line'><span class="nl">Finished:</span> <span class="n">transformation</span> <span class="n">and</span> <span class="n">transfer</span> <span class="n">of</span> <span class="n">fused</span> <span class="n">image</span><span class="p">.</span> <span class="nl">Time:</span> <span class="mf">0.15</span><span class="n">s</span><span class="p">.</span>
+</span><span class='line'><span class="p">...</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Good, but what if we releasing production version and tracing no more needed? That&rsquo;s simple! Lets change our macros.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cp">#if defined(_TRACE)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#include &lt;iostream&gt;</span>
+</span><span class='line'><span class="cp">#include &lt;sstream&gt;</span>
+</span><span class='line'><span class="cp">#include &quot;Stopwatch.h&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; std::endl; \</span>
+</span><span class='line'><span class="cp"> watch.restart()</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch) \</span>
+</span><span class='line'><span class="cp"> watch.stop(); \</span>
+</span><span class='line'><span class="cp"> std::clog &lt;&lt; what &lt;&lt; \</span>
+</span><span class='line'><span class="cp"> &quot; Time: &quot; &lt;&lt; watch.getElapsedSeconds() &lt;&lt; &quot;s.&quot; &lt;&lt; std::endl</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_PREPARE \</span>
+</span><span class='line'><span class="cp"> Stopwatch __trace_stopwatch; \</span>
+</span><span class='line'><span class="cp"> std::ostringstream __trace_ostream; \</span>
+</span><span class='line'><span class="cp"> std::string __trace_subject</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what) \</span>
+</span><span class='line'><span class="cp"> __trace_ostream.str(std::string()); \</span>
+</span><span class='line'><span class="cp"> __trace_ostream &lt;&lt; what; \</span>
+</span><span class='line'><span class="cp"> __trace_subject = __trace_ostream.str(); \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN_EX(&quot;Started: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_END \</span>
+</span><span class='line'><span class="cp"> TRACE_END_EX(&quot;Finished: &quot; &lt;&lt; __trace_subject &lt;&lt; &quot;.&quot;, __trace_stopwatch)</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE(message, action) \</span>
+</span><span class='line'><span class="cp"> TRACE_BEGIN(message); \</span>
+</span><span class='line'><span class="cp"> {action;} \</span>
+</span><span class='line'><span class="cp"> TRACE_END</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#else</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN_EX(what, watch)</span>
+</span><span class='line'><span class="cp">#define TRACE_END_EX(what, watch)</span>
+</span><span class='line'><span class="cp">#define TRACE_PREPARE</span>
+</span><span class='line'><span class="cp">#define TRACE_BEGIN(what)</span>
+</span><span class='line'><span class="cp">#define TRACE_END</span>
+</span><span class='line'><span class="cp">#define TRACE(message, action) {action;}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">#endif</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So now if we&rsquo;ll compile our code without <code>_TRACE</code> being defined, tracing simply disappears and doesn&rsquo;t have any impact on performance.</p>
+
+<p>To summarize, these simple but quite powerful macros let us easily trace our code execution (including time of execution), and at the same time we have an option to disable it by simply not defining <code>_TRACE</code> macro.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/2011/10/05/cuda-cuvec/">CUDA Vector Implementation</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-10-05T00:00:00+03:00" pubdate data-updated="true">Oct 5<span>th</span>, 2011</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
+
+<p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! vector data structure (in device memory) */</span>
+</span><span class='line'><span class="k">struct</span> <span class="n">cuvec</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="cm">/*! pointer to data */</span>
+</span><span class='line'>  <span class="n">sca</span><span class="o">*</span> <span class="n">ptr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! elements count */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">size</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! bytes taken */</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">bytes</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! skip disposal */</span>
+</span><span class='line'>  <span class="kt">bool</span> <span class="n">skip</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! constructs vector with n elements */</span>
+</span><span class='line'>  <span class="n">cuvec</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">size</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">bytes</span> <span class="o">=</span> <span class="n">size</span><span class="o">*</span><span class="k">sizeof</span><span class="p">(</span><span class="n">sca</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMalloc</span><span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span> <span class="o">&amp;</span><span class="n">ptr</span><span class="p">,</span> <span class="n">bytes</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">skip</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! copy constructor - disables disposal */</span>
+</span><span class='line'>  <span class="n">cuvec</span><span class="p">(</span><span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">other</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">size</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">size</span><span class="p">;</span>
+</span><span class='line'>      <span class="n">bytes</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">bytes</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">ptr</span> <span class="o">=</span> <span class="n">other</span><span class="p">.</span><span class="n">ptr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="c1">// disposal is disabled because resources</span>
+</span><span class='line'>      <span class="c1">// were allocated by another instance, so</span>
+</span><span class='line'>      <span class="c1">// management of them is not our responsibility</span>
+</span><span class='line'>      <span class="n">skip</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! performs disposal if allowed */</span>
+</span><span class='line'>  <span class="o">~</span><span class="n">cuvec</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">skip</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">dispose</span><span class="p">();</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="cm">/*! performs disposal */</span>
+</span><span class='line'>  <span class="kt">void</span> <span class="n">dispose</span><span class="p">()</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">if</span> <span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+</span><span class='line'>      <span class="p">{</span>
+</span><span class='line'>          <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaFree</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">ptr</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="n">ptr</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>          <span class="n">bytes</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'>      <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Probably, you&rsquo;ve noticed some unknown symbols like <code>sca</code> and <code>CUCHEK</code>. Here they are.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! scalar type */</span>
+</span><span class='line'><span class="k">typedef</span> <span class="kt">float</span> <span class="n">sca</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! vector data structure (in host memory) */</span>
+</span><span class='line'><span class="k">typedef</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">sca</span><span class="o">&gt;</span> <span class="n">vec</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! throws exception with error message if something went wrong */</span>
+</span><span class='line'><span class="cp">#define CUCHECK(x) if ((x) != cudaSuccess) \</span>
+</span><span class='line'><span class="cp"> throw std::exception(cudaGetErrorString(cudaGetLastError()))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>It feels like something is missing! Definitely, it&rsquo;s time for memory transfers from host to device and vice versa!</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="cm">/*! copies data from device to host */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">vec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMemcpy</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">to</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span>
+</span><span class='line'>      <span class="n">from</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">cudaMemcpyDeviceToHost</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from host to device */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">,</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaMemcpy</span><span class="p">((</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">to</span><span class="p">.</span><span class="n">ptr</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span>
+</span><span class='line'>      <span class="n">to</span><span class="p">.</span><span class="n">bytes</span><span class="p">,</span> <span class="n">cudaMemcpyHostToDevice</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from host to device */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">,</span> <span class="k">const</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">from</span> <span class="o">&gt;&gt;</span> <span class="n">to</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="cm">/*! copies data from device to host */</span>
+</span><span class='line'><span class="kt">void</span> <span class="k">operator</span> <span class="o">&gt;&gt;</span> <span class="p">(</span><span class="k">const</span> <span class="n">cuvec</span><span class="o">&amp;</span> <span class="n">from</span><span class="p">,</span> <span class="n">vec</span><span class="o">&amp;</span> <span class="n">to</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">to</span> <span class="o">&lt;&lt;</span> <span class="n">from</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>OK, now we are ready to test this infrastructure. We are going further with little example of usage. Let&rsquo;s suppose we want&hellip; yes, add two arrays! :)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='cpp'><span class='line'><span class="n">__global__</span> <span class="kt">void</span> <span class="n">add</span><span class="p">(</span><span class="n">cuvec</span> <span class="n">a</span><span class="p">,</span> <span class="n">cuvec</span> <span class="n">b</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">threadIdx</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">a</span><span class="p">.</span><span class="n">ptr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">b</span><span class="p">.</span><span class="n">ptr</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">execute</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="n">vec</span> <span class="n">ha</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">vec</span> <span class="n">hb</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">ha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">hb</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">cuvec</span> <span class="n">a</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">cuvec</span> <span class="n">b</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">ha</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">hb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">add</span><span class="o">&lt;&lt;&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">CUCHECK</span><span class="p">(</span><span class="n">cudaGetLastError</span><span class="p">());</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">a</span> <span class="o">&gt;&gt;</span> <span class="n">ha</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ha</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="kt">int</span> <span class="n">main</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>  <span class="k">try</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="k">return</span> <span class="n">execute</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">catch</span> <span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">exception</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>      <span class="n">std</span><span class="o">::</span><span class="n">cerr</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">.</span><span class="n">what</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span><span class='line'>      <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think this code is more readable and easier to write and maintain, than that one which uses a bunch of <code>cudaMalloc</code>, <code>cudaFree</code> and <code>cudaMemcpy</code>.
+One more advantage of <code>cuvec</code> is kind of smart disposal. Probably, you&rsquo;ve spotted that data is passed to <code>add</code> kernel by value, not by reference (this is restricted) or by pointer (this is not correct). So, destructor of <code>cuvec</code> will be called several times, but we need only one disposal right at the end of the execution, and this happens right as expected.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  <div class="pagination">
+    
+    <a href="/blog/archives">Blog Archives</a>
+    
+    <a class="next" href="/">Newer &rarr;</a>
+    
+  </div>
+</div>
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating&#8230;</li>
+  </ul>
+  
+  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'titarenko',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Constantin Titarenko -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'titarenko-blog';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

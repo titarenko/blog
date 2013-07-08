@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Windows | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/windows/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Assembly (DLL) is Missing?]]></title>
+    <link href="blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing/"/>
+    <updated>2012-02-08T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing</id>
+    <content type="html"><![CDATA[<p>Being involved into development of huge enterprise system, while working on distribution package building subsystem, I faced next problem &ndash; just deployed application crashed because of missing third-party assembly. Despite I had name of that DLL, I couldn&rsquo;t figure out what&rsquo;s wrong because exactly this DLL was present in the package.</p>
+
+<p>The possible reason for error, obviously, was some another DLL, which was required by original one. So having lots of dependencies pushed me to find right way of investigating such kind of problems &ndash; that is using of Fusion Log Viewer (<code>fuslogvw.exe</code>) which is usually located in <code>%Program Files%\Microsoft SDKs\Windows\v7.0A\Bin</code>.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvw.png" alt="Fusion Log Viewer (fuslogvw.exe)" /></p>
+
+<p>Algorithm is very clear: run viewer, clean current log, run your application and then see what is causing the problem. One note: please don&rsquo;t forget to verify your settings: &ldquo;Log bind failures to disk&rdquo; should be chosen.</p>
+
+<p><img src="http://ctitarenko.files.wordpress.com/2012/02/fuslogvwsettings.png" alt="Fusion Log Viewer Settings" /></p>
+]]></content>
+  </entry>
+  
+</feed>

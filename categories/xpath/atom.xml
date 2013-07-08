@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: XPath | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/xpath/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[XPath: Select Node with Child Containing Given Substring]]></title>
+    <link href="blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/"/>
+    <updated>2012-04-04T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring</id>
+    <content type="html"><![CDATA[<p>XPath is very interesting topic, essentially it allows you to do quite sophisticated things. And in this short post, I&rsquo;ll give example how to create a little more complex than plain query: it will return all books, which contains &ldquo;C++&rdquo; in any of its childrens' texts (please, see <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms762271%28v=vs.85%29.aspx">example of such XML here</a>).</p>
+
+<p>So, our query is following:</p>
+
+<p><code>
+//*[contains(text(), 'C++')]/parent::book
+</code></p>
+
+<p>It will return:</p>
+
+<p>```xml
+<book id="bk112"></p>
+
+<pre><code>&lt;author&gt;Galos, Mike&lt;/author&gt;
+&lt;title&gt;Visual Studio 7: A Comprehensive Guide&lt;/title&gt;
+&lt;genre&gt;Computer&lt;/genre&gt;
+&lt;price&gt;49.95&lt;/price&gt;
+&lt;publish_date&gt;2001-04-16&lt;/publish_date&gt;
+&lt;description&gt;Microsoft Visual Studio 7 is explored in depth,
+looking at how Visual Basic, Visual C++, C#, and ASP+ are 
+integrated into a comprehensive development 
+environment.&lt;/description&gt;
+</code></pre>
+
+<p></book>
+```</p>
+
+<p>That&rsquo;s it. Simple. But useful, especially if you haven&rsquo;t worked with XPath too much before.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Dealing with Namespaces in XPath (.NET)]]></title>
+    <link href="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/"/>
+    <updated>2012-04-04T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net</id>
+    <content type="html"><![CDATA[<p>This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty prefix).</p>
+
+<p>Normally, when doing queries to document <em>with namespaces</em>, you involve <code>XmlNamespaceManager</code> like this:</p>
+
+<p>```csharp
+var namespaceManager = new XmlNamespaceManager(document.NameTable);</p>
+
+<p>var namespaces = document</p>
+
+<pre><code>.DocumentElement
+.Attributes
+.Cast&lt;XmlAttribute&gt;()
+.Where(x =&gt; x.Name.StartsWith("xmlns"))
+.Select(x =&gt; new
+    {
+        Prefix = x.Name.Length &gt; 5
+                        ? x.Name.Substring(6) // case when name is like "xmlns:something"
+                        : string.Empty, // case when name is "xmlns" - default namespace
+        Uri = x.Value
+    });
+</code></pre>
+
+<p>foreach (var ns in namespaces)
+{</p>
+
+<pre><code>namespaceManager.AddNamespace(ns.Prefix, ns.Uri);
+</code></pre>
+
+<p>}</p>
+
+<p>var nodes = document.SelectNodes(&ldquo;//node/subnode&rdquo;, namespaceManager);
+```</p>
+
+<p>But wait! This query <em>will return no results</em>! The reason is not so obvious: you <em>must use prefix for default namespace</em>, it can&rsquo;t be omitted! So, to make such queries working, we need to change the initial code as well as XPath query:</p>
+
+<p>```csharp
+&hellip;</p>
+
+<pre><code>        Prefix = x.Name.Length &gt; 5
+                        ? x.Name.Substring(6) // case when name is like "xmlns:something"
+                        : "default", // case when name is "xmlns" - default namespace
+        Uri = x.Value
+</code></pre>
+
+<p>&hellip;
+var nodes = document.SelectNodes(&ldquo;//default:node/default:subnode&rdquo;, namespaceManager);
+```</p>
+
+<p>Good, now it&rsquo;s OK, we&rsquo;ve got our results.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Extracting Tables from Microsoft Word 2007+ (OpenXML) Document]]></title>
+    <link href="blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/"/>
+    <updated>2012-04-03T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose we have huge Word 2007+ document (*.docx) with lots of tables and we want to extract that information for further processing. Since our document is based on OpenXML format I would say &ldquo;No problem! Let&rsquo;s do it!&rdquo;.</p>
+
+<p>First, we need to open zip archive (each *.docx is zipped set of XML files). For this purpose we can use great library DotNetZip (just use NuGet to obtain it). Right after this we&rsquo;ll read word/document.xml entry.</p>
+
+<p>```csharp
+static void Main(string[] args)
+{</p>
+
+<pre><code>using (var file = ZipFile.Read(args[0]))
+using (var inputStream = file["word/document.xml"].OpenReader())
+{
+    var document = new XmlDocument();
+    document.Load(inputStream);
+
+    var tables = ExtractTables(document);
+
+    using (var outputStream = File.Create(args[1]))
+    {
+        new XmlSerializer(typeof(Table[])).Serialize(outputStream, tables);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Then we&rsquo;ll extract neccessary pieces using XPath: our target is <code>w:tbl</code> nodes (tables) with such descendants as <code>w:tr</code> (rows), <code>w:tc</code> (cells) and <code>w:t</code> (text pieces).</p>
+
+<p>```csharp
+private static Table[] ExtractTables(XmlNode document)
+{</p>
+
+<pre><code>return document.Select("//w:tbl", tableNode =&gt; new Table
+{
+    Rows = tableNode.Select(".//w:tr", rowNode =&gt; new Row
+    {
+        Cells = rowNode.Select(".//w:tc", cellNode =&gt; new Cell
+        {
+            Text = cellNode.Select(".//w:t", textNode =&gt; textNode.InnerText)
+        })
+    })
+});
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Classes <code>Table</code>, <code>Row</code> and <code>Cell</code> are simple DTOs used for simplifying of result serialization.</p>
+
+<p>One more thing is <code>.Select()</code> extension method &ndash; it&rsquo;s implemented in the following way:</p>
+
+<p>```csharp
+public static T[] Select<T>(this XmlNode node, string xpath, Func&lt;XmlNode, T> selector)
+{</p>
+
+<pre><code>return node
+    .SelectNodes(xpath, GetOrCreateNamespaceManager((node as XmlDocument ?? node.OwnerDocument).NameTable))
+    .Cast&lt;XmlNode&gt;()
+    .Select(selector)
+    .ToArray();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Method .GetOrCreateNamespaceManager() returns namespace manager as it&rsquo;s required for making of XPath queries with use of namespaces. There is only one parameter for it &ndash; name table instance.</p>
+
+<p>```csharp
+private static XmlNamespaceManager GetOrCreateNamespaceManager(XmlNameTable nameTable)
+{</p>
+
+<pre><code>if (manager == null)
+{
+    manager = new XmlNamespaceManager(nameTable);
+    manager.AddNamespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+}
+
+return manager;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>That&rsquo;s it! Due to openness of new Word document&rsquo;s format our initial task is so simple in implementation that it takes no more than couple of hours to implement it.</p>
+]]></content>
+  </entry>
+  
+</feed>

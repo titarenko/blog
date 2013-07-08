@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Math | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/math/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Snapping To Grid]]></title>
+    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
+
+<p>```csharp
+public double SnapValue(double value, double step)
+{</p>
+
+<pre><code>var remainder = Math.IEEERemainder(value, step);
+return step/2 &gt; remainder ? value - remainder : value + remainder;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>So, assuming your you have an axis with step 0.5, value 10.2 will be snapped to 10 (closest node), and value 10.78, in turn, &ndash; to 11.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inference of Random Value Distribution Formula]]></title>
+    <link href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
+    <updated>2012-02-29T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
+    <content type="html"><![CDATA[<p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
+
+<p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
+
+<p>So, let&rsquo;s suppose we have <code>N</code> things to happen in <code>1</code> experiment and we are running <code>K</code> experiments. What is distribution of <code>X</code> &ndash; count of certain single result appearances?</p>
+
+<p>As for me, the best way is to infer formula from simple example. Imagine, we have <code>3</code> balls in a box: <code>"1"</code>, <code>"2"</code>, <code>"3"</code>. Next, our experiment looks like this: take a ball, write its number, put it back. Given <code>4</code> experiments what results can we have?</p>
+
+<p>Let&rsquo;s write simple script to model our experiment.</p>
+
+<p>```python
+from itertools import product, groupby
+from operator import itemgetter
+c = [&ldquo;&rdquo;.join(x) for x in product(&ldquo;123&rdquo;, repeat=4)]
+d = sorted([(x, x.count(&ldquo;1&rdquo;)) for x in c], key=itemgetter(1))
+for x in d:</p>
+
+<pre><code>print(x[0] + ": " + str(x[1]))
+</code></pre>
+
+<p>```</p>
+
+<p>So, here are the results (combination itself and count of <code>"1"</code>):</p>
+
+<p><code>
+ 2222: 0
+ 2223: 0
+ 2232: 0
+ 2233: 0
+ ...
+ 3333: 0
+ 1222: 1
+ 1223: 1
+ ...
+ 1333: 1
+ 2122: 1
+ 2123: 1
+ ...
+ 3331: 1
+ 1122: 2
+ 1123: 2
+ 1132: 2
+ ...
+ 3311: 2
+ 1112: 3
+ 1113: 3
+ 1121: 3
+ ...
+ 3111: 3
+ 1111: 4
+</code></p>
+
+<p>So, let&rsquo;s start from <code>0</code> appearances. In this case combination can be composed from only <code>2</code> balls, that is <code>(N-1)</code>, since third has no appearances. OK, how much combinations we can compose from <code>2</code> balls taken <code>4</code> times? Right, <code>2^4 = 16</code>.</p>
+
+<p>Next, let&rsquo;s consider case when certain ball appears only once. Here we have slightly more complex case: we still have <code>2</code> balls and <code>3</code> positions for them, but now we can also insert third ball in the combination &ndash; <code>1xxx</code>, <code>x1xx</code> and so on. Accounting that, there are <code>C(4,1)</code> ways to do this insertion, that&rsquo;s why final count of combinations is <code>C(4,1)*2^3 = 32</code>.</p>
+
+<p>Now we have <code>2</code> appearances. This case is pretty similar to above one, but at the moment we have to pick <code>2</code> places for <code>"1"</code> and there are <code>2</code> places left for <code>"2"</code> and <code>"3"</code>. So, combinations count is <code>C(4,2)*2^2 = 24</code>.</p>
+
+<p>Next case, with <code>3</code> appearances of <code>"1"</code>, is again very similar to previous ones: we are picking <code>3</code> places for <code>"1"</code> and we have only one place for <code>"2"</code> or <code>"3"</code>. Combinations count is <code>C(4,3)*2 = 8</code>.</p>
+
+<p>Last case is the simplest one &ndash; we can have <code>4</code> appearances of <code>"1"</code> in <code>4</code> experiments only once.</p>
+
+<p>So, looking at our consideration, we can infer common formula: <code>Q(x) = C(K,x)*(N-1)^(K-x)</code>.</p>
+
+<p>Let&rsquo;s test this formula with case from Central Limit Theorem lecture. So, we have a coin and 5 flips. Due to nature of process we are expecting normal distribution. Let&rsquo;s verify that: <code>Q(x) = C(5,x)*(2-1)^(5-x) = C(5,x)</code>.</p>
+
+<p>So, our formula is correct, giving us next results:</p>
+
+<p><code>
+Q(0) = C(5,0) = 1
+Q(1) = C(5,1) = 5
+Q(2) = C(5,2) = 10
+Q(3) = C(5,3) = 10
+Q(4) = C(5,4) = 5
+Q(5) = C(5,5) = 1
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

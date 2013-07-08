@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CUDA | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/cuda/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CUDA Vector Implementation]]></title>
+    <link href="blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
+    <updated>2011-10-05T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2011/10/05/cuda-cuvec</id>
+    <content type="html"><![CDATA[<p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
+
+<p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>
+
+<p>```cpp
+/<em>! vector data structure (in device memory) </em>/
+struct cuvec
+{</p>
+
+<pre><code>/*! pointer to data */
+sca* ptr;
+
+/*! elements count */
+int size;
+
+/*! bytes taken */
+int bytes;
+
+/*! skip disposal */
+bool skip;
+
+/*! constructs vector with n elements */
+cuvec(int n)
+{
+    size = n;
+    bytes = size*sizeof(sca);
+
+    CUCHECK(cudaMalloc((void**) &amp;ptr, bytes));
+
+    skip = false;
+}
+
+/*! copy constructor - disables disposal */
+cuvec(const cuvec&amp; other)
+{
+    size = other.size;
+    bytes = other.bytes;
+
+    ptr = other.ptr;
+
+    // disposal is disabled because resources
+    // were allocated by another instance, so
+    // management of them is not our responsibility
+    skip = true;
+}
+
+/*! performs disposal if allowed */
+~cuvec()
+{
+    if (!skip)
+    {
+        dispose();
+    }
+}
+
+/*! performs disposal */
+void dispose()
+{
+    if (ptr)
+    {
+        CUCHECK(cudaFree((void*) ptr));
+
+        ptr = 0;
+        size = 0;
+        bytes = 0;
+    }
+}
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Probably, you&rsquo;ve noticed some unknown symbols like <code>sca</code> and <code>CUCHEK</code>. Here they are.</p>
+
+<p>```cpp
+/<em>! scalar type </em>/
+typedef float sca;</p>
+
+<p>/<em>! vector data structure (in host memory) </em>/
+typedef std::vector<sca> vec;</p>
+
+<p>/<em>! throws exception with error message if something went wrong </em>/</p>
+
+<h1>define CUCHECK(x) if ((x) != cudaSuccess) \</h1>
+
+<pre><code>throw std::exception(cudaGetErrorString(cudaGetLastError()))
+</code></pre>
+
+<p>```</p>
+
+<p>It feels like something is missing! Definitely, it&rsquo;s time for memory transfers from host to device and vice versa!</p>
+
+<p>```cpp
+/<em>! copies data from device to host </em>/
+void operator &lt;&lt; (vec&amp; to, const cuvec&amp; from)
+{</p>
+
+<pre><code>CUCHECK(cudaMemcpy((void*) to.data(), (void*) from.ptr,
+    from.bytes, cudaMemcpyDeviceToHost));
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from host to device </em>/
+void operator >> (const vec&amp; from, cuvec&amp; to)
+{</p>
+
+<pre><code>CUCHECK(cudaMemcpy((void*) to.ptr, (void*) from.data(),
+    to.bytes, cudaMemcpyHostToDevice));
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from host to device </em>/
+void operator &lt;&lt; (cuvec&amp; to, const vec&amp; from)
+{</p>
+
+<pre><code>from &gt;&gt; to;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from device to host </em>/
+void operator >> (const cuvec&amp; from, vec&amp; to)
+{</p>
+
+<pre><code>to &lt;&lt; from;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>OK, now we are ready to test this infrastructure. We are going further with little example of usage. Let&rsquo;s suppose we want&hellip; yes, add two arrays! :)</p>
+
+<p>```cpp
+<strong>global</strong> void add(cuvec a, cuvec b)
+{</p>
+
+<pre><code>int i = threadIdx.x;
+a.ptr[i] += b.ptr[i];
+</code></pre>
+
+<p>}</p>
+
+<p>int execute()
+{</p>
+
+<pre><code>vec ha(10);
+vec hb(10);
+
+for (int i = 0; i &lt; 10; ++i)
+    ha[i] = hb[i] = i;
+
+cuvec a(10);
+cuvec b(10);
+
+a &lt;&lt; ha;
+b &lt;&lt; hb;
+
+add&lt;&lt;&lt;1, 10&gt;&gt;&gt;(a, b);
+CUCHECK(cudaGetLastError());
+
+a &gt;&gt; ha;
+
+for (int i = 0; i &lt; 10; ++i)
+    std::cout &lt;&lt; ha[i] &lt;&lt; std::endl;
+
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<p>int main()
+{</p>
+
+<pre><code>try
+{
+    return execute();
+}
+catch (std::exception e)
+{
+    std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;
+    return -1;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>I think this code is more readable and easier to write and maintain, than that one which uses a bunch of <code>cudaMalloc</code>, <code>cudaFree</code> and <code>cudaMemcpy</code>.
+One more advantage of <code>cuvec</code> is kind of smart disposal. Probably, you&rsquo;ve spotted that data is passed to <code>add</code> kernel by value, not by reference (this is restricted) or by pointer (this is not correct). So, destructor of <code>cuvec</code> will be called several times, but we need only one disposal right at the end of the execution, and this happens right as expected.</p>
+]]></content>
+  </entry>
+  
+</feed>

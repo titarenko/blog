@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C++ | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Useful Information In Exceptions]]></title>
+    <link href="blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
+    <content type="html"><![CDATA[<p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
+
+<p>```cpp
+/*!</p>
+
+<pre><code>For internal use.
+</code></pre>
+
+<p>*/</p>
+
+<h1>define __TO_STRING(what) #what</h1>
+
+<h1>define __WHAT(message, file, line, date, time) \</h1>
+
+<pre><code>message " (" file ": " __TO_STRING(line) ", built at " date " " time ")"
+</code></pre>
+
+<p>/*!</p>
+
+<pre><code>Throws standard exception with given message and
+information about source file name, line and build date.
+</code></pre>
+
+<p>*/</p>
+
+<h1>define THROW_EXCEPTION(message) throw std::exception( \</h1>
+
+<pre><code>__WHAT(message, __FILE__, __LINE__, __DATE__, __TIME__))
+</code></pre>
+
+<p>```</p>
+
+<p>So, here is an example of usage of that macro.</p>
+
+<p>```cpp
+int main()
+{</p>
+
+<pre><code>try
+{
+    THROW_EXCEPTION("Error!");
+}
+catch(const std::exception&amp; e)
+{
+    std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In this case STDERR will contain next line.</p>
+
+<p><code>
+Error! (d:\projects\test\main.cpp: 22, built at Nov 12 2011 13:51:15)
+</code></p>
+
+<p>Now we can explicitly see where that exception was thrown, moreover &ndash; we know when build was made.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tracing C++ Code Execution]]></title>
+    <link href="blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
+    <content type="html"><![CDATA[<p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
+
+<p>```cpp</p>
+
+<h1>define TRACE_BEGIN_EX(what, watch) \</h1>
+
+<pre><code>std::clog &lt;&lt; what &lt;&lt; std::endl; \
+watch.restart()
+</code></pre>
+
+<h1>define TRACE_END_EX(what, watch) \</h1>
+
+<pre><code>watch.stop(); \
+std::clog &lt;&lt; what &lt;&lt; \
+" Time: " &lt;&lt; watch.getElapsedSeconds() &lt;&lt; "s." &lt;&lt; std::endl
+</code></pre>
+
+<p>```</p>
+
+<p>Have you spotted that parameter <code>watch</code>? It is an instance of the following class.</p>
+
+<p>```cpp
+/*!</p>
+
+<pre><code>Represents stopwatch for measuring code execution time.
+</code></pre>
+
+<p>*/
+class Stopwatch
+{
+public:</p>
+
+<pre><code>/*!
+    Initializes and starts stopwatch.
+*/
+Stopwatch();
+
+/*!
+    Clears elapsed time value and starts stopwatch.
+*/
+void restart();
+
+/*!
+    Stops stopwatch.
+*/
+void stop();
+
+/*!
+    Returns number of elapsed seconds since start.
+*/
+numeric_t getElapsedSeconds() const;
+</code></pre>
+
+<p>private:</p>
+
+<pre><code>clock_t _begin;
+numeric_t _length;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>If you wonder what is <code>numeric_t</code> &ndash; this is nothing but simple alias of <code>float</code>. So, lets see an example of usage (excerpt from the source code).</p>
+
+<p>```cpp
+&hellip;
+TRACE_BEGIN_EX(&ldquo;Application started (MPI process #&rdquo;</p>
+
+<pre><code>    &lt;&lt; _processIndex &lt;&lt; ").", _watch);
+</code></pre>
+
+<p>&hellip;
+TRACE_END_EX(&ldquo;Application finished (MPI process #&rdquo;</p>
+
+<pre><code>    &lt;&lt; _processIndex &lt;&lt; ").", _watch);
+</code></pre>
+
+<p>```</p>
+
+<p>It will be more useful if we&rsquo;ll introduce few new macros.</p>
+
+<p>```cpp</p>
+
+<h1>define TRACE_PREPARE \</h1>
+
+<pre><code>Stopwatch __trace_stopwatch; \
+std::ostringstream __trace_ostream; \
+std::string __trace_subject
+</code></pre>
+
+<h1>define TRACE_BEGIN(what) \</h1>
+
+<pre><code>__trace_ostream.str(std::string()); \
+__trace_ostream &lt;&lt; what; \
+__trace_subject = __trace_ostream.str(); \
+TRACE_BEGIN_EX("Started: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE_END \</h1>
+
+<pre><code>TRACE_END_EX("Finished: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE(message, action) \</h1>
+
+<pre><code>TRACE_BEGIN(message); \
+{action;} \
+TRACE_END
+</code></pre>
+
+<p>```</p>
+
+<p>So now we are able to write something like this (excerpt from source code of image fusion application).</p>
+
+<p>```cpp
+TRACE(&ldquo;transformation and transfer of fused image&rdquo;,
+{</p>
+
+<pre><code>saveChannel(0);
+saveChannel(1);
+saveChannel(2);
+</code></pre>
+
+<p>});
+```</p>
+
+<p>OK, once we have compiled and run application, we can see something like this.</p>
+
+<p><code>
+...
+Started: transformation and transfer of fused image.
+Finished: transformation and transfer of fused image. Time: 0.15s.
+...
+</code></p>
+
+<p>Good, but what if we releasing production version and tracing no more needed? That&rsquo;s simple! Lets change our macros.</p>
+
+<p>```cpp</p>
+
+<h1>if defined(_TRACE)</h1>
+
+<h1>include <iostream></h1>
+
+<h1>include <sstream></h1>
+
+<h1>include &ldquo;Stopwatch.h&rdquo;</h1>
+
+<h1>define TRACE_BEGIN_EX(what, watch) \</h1>
+
+<pre><code>std::clog &lt;&lt; what &lt;&lt; std::endl; \
+watch.restart()
+</code></pre>
+
+<h1>define TRACE_END_EX(what, watch) \</h1>
+
+<pre><code>watch.stop(); \
+std::clog &lt;&lt; what &lt;&lt; \
+" Time: " &lt;&lt; watch.getElapsedSeconds() &lt;&lt; "s." &lt;&lt; std::endl
+</code></pre>
+
+<h1>define TRACE_PREPARE \</h1>
+
+<pre><code>Stopwatch __trace_stopwatch; \
+std::ostringstream __trace_ostream; \
+std::string __trace_subject
+</code></pre>
+
+<h1>define TRACE_BEGIN(what) \</h1>
+
+<pre><code>__trace_ostream.str(std::string()); \
+__trace_ostream &lt;&lt; what; \
+__trace_subject = __trace_ostream.str(); \
+TRACE_BEGIN_EX("Started: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE_END \</h1>
+
+<pre><code>TRACE_END_EX("Finished: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE(message, action) \</h1>
+
+<pre><code>TRACE_BEGIN(message); \
+{action;} \
+TRACE_END
+</code></pre>
+
+<h1>else</h1>
+
+<h1>define TRACE_BEGIN_EX(what, watch)</h1>
+
+<h1>define TRACE_END_EX(what, watch)</h1>
+
+<h1>define TRACE_PREPARE</h1>
+
+<h1>define TRACE_BEGIN(what)</h1>
+
+<h1>define TRACE_END</h1>
+
+<h1>define TRACE(message, action) {action;}</h1>
+
+<h1>endif</h1>
+
+<p>```</p>
+
+<p>So now if we&rsquo;ll compile our code without <code>_TRACE</code> being defined, tracing simply disappears and doesn&rsquo;t have any impact on performance.</p>
+
+<p>To summarize, these simple but quite powerful macros let us easily trace our code execution (including time of execution), and at the same time we have an option to disable it by simply not defining <code>_TRACE</code> macro.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CUDA Vector Implementation]]></title>
+    <link href="blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
+    <updated>2011-10-05T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2011/10/05/cuda-cuvec</id>
+    <content type="html"><![CDATA[<p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
+
+<p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>
+
+<p>```cpp
+/<em>! vector data structure (in device memory) </em>/
+struct cuvec
+{</p>
+
+<pre><code>/*! pointer to data */
+sca* ptr;
+
+/*! elements count */
+int size;
+
+/*! bytes taken */
+int bytes;
+
+/*! skip disposal */
+bool skip;
+
+/*! constructs vector with n elements */
+cuvec(int n)
+{
+    size = n;
+    bytes = size*sizeof(sca);
+
+    CUCHECK(cudaMalloc((void**) &amp;ptr, bytes));
+
+    skip = false;
+}
+
+/*! copy constructor - disables disposal */
+cuvec(const cuvec&amp; other)
+{
+    size = other.size;
+    bytes = other.bytes;
+
+    ptr = other.ptr;
+
+    // disposal is disabled because resources
+    // were allocated by another instance, so
+    // management of them is not our responsibility
+    skip = true;
+}
+
+/*! performs disposal if allowed */
+~cuvec()
+{
+    if (!skip)
+    {
+        dispose();
+    }
+}
+
+/*! performs disposal */
+void dispose()
+{
+    if (ptr)
+    {
+        CUCHECK(cudaFree((void*) ptr));
+
+        ptr = 0;
+        size = 0;
+        bytes = 0;
+    }
+}
+</code></pre>
+
+<p>};
+```</p>
+
+<p>Probably, you&rsquo;ve noticed some unknown symbols like <code>sca</code> and <code>CUCHEK</code>. Here they are.</p>
+
+<p>```cpp
+/<em>! scalar type </em>/
+typedef float sca;</p>
+
+<p>/<em>! vector data structure (in host memory) </em>/
+typedef std::vector<sca> vec;</p>
+
+<p>/<em>! throws exception with error message if something went wrong </em>/</p>
+
+<h1>define CUCHECK(x) if ((x) != cudaSuccess) \</h1>
+
+<pre><code>throw std::exception(cudaGetErrorString(cudaGetLastError()))
+</code></pre>
+
+<p>```</p>
+
+<p>It feels like something is missing! Definitely, it&rsquo;s time for memory transfers from host to device and vice versa!</p>
+
+<p>```cpp
+/<em>! copies data from device to host </em>/
+void operator &lt;&lt; (vec&amp; to, const cuvec&amp; from)
+{</p>
+
+<pre><code>CUCHECK(cudaMemcpy((void*) to.data(), (void*) from.ptr,
+    from.bytes, cudaMemcpyDeviceToHost));
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from host to device </em>/
+void operator >> (const vec&amp; from, cuvec&amp; to)
+{</p>
+
+<pre><code>CUCHECK(cudaMemcpy((void*) to.ptr, (void*) from.data(),
+    to.bytes, cudaMemcpyHostToDevice));
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from host to device </em>/
+void operator &lt;&lt; (cuvec&amp; to, const vec&amp; from)
+{</p>
+
+<pre><code>from &gt;&gt; to;
+</code></pre>
+
+<p>}</p>
+
+<p>/<em>! copies data from device to host </em>/
+void operator >> (const cuvec&amp; from, vec&amp; to)
+{</p>
+
+<pre><code>to &lt;&lt; from;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>OK, now we are ready to test this infrastructure. We are going further with little example of usage. Let&rsquo;s suppose we want&hellip; yes, add two arrays! :)</p>
+
+<p>```cpp
+<strong>global</strong> void add(cuvec a, cuvec b)
+{</p>
+
+<pre><code>int i = threadIdx.x;
+a.ptr[i] += b.ptr[i];
+</code></pre>
+
+<p>}</p>
+
+<p>int execute()
+{</p>
+
+<pre><code>vec ha(10);
+vec hb(10);
+
+for (int i = 0; i &lt; 10; ++i)
+    ha[i] = hb[i] = i;
+
+cuvec a(10);
+cuvec b(10);
+
+a &lt;&lt; ha;
+b &lt;&lt; hb;
+
+add&lt;&lt;&lt;1, 10&gt;&gt;&gt;(a, b);
+CUCHECK(cudaGetLastError());
+
+a &gt;&gt; ha;
+
+for (int i = 0; i &lt; 10; ++i)
+    std::cout &lt;&lt; ha[i] &lt;&lt; std::endl;
+
+return 0;
+</code></pre>
+
+<p>}</p>
+
+<p>int main()
+{</p>
+
+<pre><code>try
+{
+    return execute();
+}
+catch (std::exception e)
+{
+    std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;
+    return -1;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>I think this code is more readable and easier to write and maintain, than that one which uses a bunch of <code>cudaMalloc</code>, <code>cudaFree</code> and <code>cudaMemcpy</code>.
+One more advantage of <code>cuvec</code> is kind of smart disposal. Probably, you&rsquo;ve spotted that data is passed to <code>add</code> kernel by value, not by reference (this is restricted) or by pointer (this is not correct). So, destructor of <code>cuvec</code> will be called several times, but we need only one disposal right at the end of the execution, and this happens right as expected.</p>
+]]></content>
+  </entry>
+  
+</feed>

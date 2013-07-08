@@ -1,0 +1,379 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Inference of Random Value Distribution Formula - Constantin Titarenko's Blog</title>
+  <meta name="author" content="Constantin Titarenko">
+
+  
+  <meta name="description" content="This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math. Watching Central Limit Theorem lecture ( &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
+  
+    <h2>Notes regarding software development.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.titarenko.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Inference of Random Value Distribution Formula</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-29T00:00:00+02:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
+
+<p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
+
+<p>So, let&rsquo;s suppose we have <code>N</code> things to happen in <code>1</code> experiment and we are running <code>K</code> experiments. What is distribution of <code>X</code> &ndash; count of certain single result appearances?</p>
+
+<p>As for me, the best way is to infer formula from simple example. Imagine, we have <code>3</code> balls in a box: <code>"1"</code>, <code>"2"</code>, <code>"3"</code>. Next, our experiment looks like this: take a ball, write its number, put it back. Given <code>4</code> experiments what results can we have?</p>
+
+<p>Let&rsquo;s write simple script to model our experiment.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span><span class="p">,</span> <span class="n">groupby</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+</span><span class='line'><span class="n">c</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="s">&quot;123&quot;</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">4</span><span class="p">)]</span>
+</span><span class='line'><span class="n">d</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="s">&quot;1&quot;</span><span class="p">))</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">c</span><span class="p">],</span> <span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span><span class='line'><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">d</span><span class="p">:</span>
+</span><span class='line'>    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s">&quot;: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, here are the results (combination itself and count of <code>"1"</code>):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'> <span class="mi">2222</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2223</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2232</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">2233</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3333</span><span class="p">:</span> <span class="mi">0</span>
+</span><span class='line'> <span class="mi">1222</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1223</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">1333</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2122</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">2123</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3331</span><span class="p">:</span> <span class="mi">1</span>
+</span><span class='line'> <span class="mi">1122</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1123</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1132</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3311</span><span class="p">:</span> <span class="mi">2</span>
+</span><span class='line'> <span class="mi">1112</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1113</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1121</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="o">...</span>
+</span><span class='line'> <span class="mi">3111</span><span class="p">:</span> <span class="mi">3</span>
+</span><span class='line'> <span class="mi">1111</span><span class="p">:</span> <span class="mi">4</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So, let&rsquo;s start from <code>0</code> appearances. In this case combination can be composed from only <code>2</code> balls, that is <code>(N-1)</code>, since third has no appearances. OK, how much combinations we can compose from <code>2</code> balls taken <code>4</code> times? Right, <code>2^4 = 16</code>.</p>
+
+<p>Next, let&rsquo;s consider case when certain ball appears only once. Here we have slightly more complex case: we still have <code>2</code> balls and <code>3</code> positions for them, but now we can also insert third ball in the combination &ndash; <code>1xxx</code>, <code>x1xx</code> and so on. Accounting that, there are <code>C(4,1)</code> ways to do this insertion, that&rsquo;s why final count of combinations is <code>C(4,1)*2^3 = 32</code>.</p>
+
+<p>Now we have <code>2</code> appearances. This case is pretty similar to above one, but at the moment we have to pick <code>2</code> places for <code>"1"</code> and there are <code>2</code> places left for <code>"2"</code> and <code>"3"</code>. So, combinations count is <code>C(4,2)*2^2 = 24</code>.</p>
+
+<p>Next case, with <code>3</code> appearances of <code>"1"</code>, is again very similar to previous ones: we are picking <code>3</code> places for <code>"1"</code> and we have only one place for <code>"2"</code> or <code>"3"</code>. Combinations count is <code>C(4,3)*2 = 8</code>.</p>
+
+<p>Last case is the simplest one &ndash; we can have <code>4</code> appearances of <code>"1"</code> in <code>4</code> experiments only once.</p>
+
+<p>So, looking at our consideration, we can infer common formula: <code>Q(x) = C(K,x)*(N-1)^(K-x)</code>.</p>
+
+<p>Let&rsquo;s test this formula with case from Central Limit Theorem lecture. So, we have a coin and 5 flips. Due to nature of process we are expecting normal distribution. Let&rsquo;s verify that: <code>Q(x) = C(5,x)*(2-1)^(5-x) = C(5,x)</code>.</p>
+
+<p>So, our formula is correct, giving us next results:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span> <span class="o">=</span> <span class="mi">10</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="o">=</span> <span class="mi">5</span>
+</span><span class='line'><span class="n">Q</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span> <span class="o">=</span> <span class="mi">1</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Constantin Titarenko</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-02-29T00:00:00+02:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/math/'>Math</a>, <a class='category' href='/categories/python/'>Python</a>, <a class='category' href='/categories/snippet/'>Snippet</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/" data-via="ctitarenko" data-counturl="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/02/20/cookie-aware-webclient-net/" title="Previous Post: Cookie Aware WebClient (.NET)">&laquo; Cookie Aware WebClient (.NET)</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/03/24/bdd-with-specflow-and-watin/" title="Next Post: BDD with SpecFlow and WatiN">BDD with SpecFlow and WatiN &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'titarenko',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Constantin Titarenko -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'titarenko-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/';
+        var disqus_url = 'blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

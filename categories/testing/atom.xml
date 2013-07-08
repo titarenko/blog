@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Testing | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/testing/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[BDD with SpecFlow and WatiN]]></title>
+    <link href="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/"/>
+    <updated>2012-03-24T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve long heard about BDD, and recently viewed lectures from <a href="http://saas-class.org">SaaS class</a> really interested me not only in Ruby (with such great frameworks as Rails and Cucumber), but also in practical use of this methodology in .NET, which is my main platform at the moment. So, I decided to try writing small web app using BDD approach assisted by SpecFlow tool for definition of features and latter execution of test based on them, and WatiN as tool which would help to grab content from browser to make assertions on expected results.</p>
+
+<p>Here is the feature file:</p>
+
+<p>```gherkin
+Feature: Viewing of rates</p>
+
+<pre><code>In order to view available conversion rates
+As a user
+I want to see current rates as well as their changes history
+</code></pre>
+
+<p>Scenario: View current rates</p>
+
+<pre><code>Given I have following exchange rates in the system
+    | From | To  | Rate |
+    | USD  | UAH | 8.03 |
+    | RUR  | UAH | 0.27 |
+When I am on home page
+Then I should see following rows
+    | V1  | V2  | V3     |
+    | USD | UAH | 8.0300 |
+    | RUR | UAH | 0.2700 |
+</code></pre>
+
+<p>```</p>
+
+<p>Implementation of most steps is pretty straightforward and not listed here, except &ldquo;Then&rdquo; step. So, below is its initial implementation.</p>
+
+<p>```csharp
+[Then(@&ldquo;I should see following rows&rdquo;)]
+public void ThenIShouldSeeFollowingRows(Table table)
+{</p>
+
+<pre><code>foreach (var row in table.Rows)
+{
+    Assert.That(
+        Browser.Table("exchange-rates").TableRows.Any(
+            exchangeRate =&gt; row.Values.All(
+                text =&gt; exchangeRate.TableCell(Find.ByText(text)).Exists)),
+        string.Format("Page contains following row: {0}.", row.ToReadableString()));
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Being WatiN newbie, I&rsquo;d made a step on a rake and trial to execute scenario led to StackOverflowException in WatiN.Core, so after googling a bit I decided to parse table first and only then make assertions. Said &ndash; done: updated implementation is below.</p>
+
+<p>```
+csharp[Then(@&ldquo;I should see following rows&rdquo;)]
+public void ThenIShouldSeeFollowingRows(Table table)
+{</p>
+
+<pre><code>var actualTable = Browser
+    .Table("exchange-rates")
+    .TableRows
+    .Where(r =&gt; r.TableCells.Any())
+    .Select(r =&gt; r.TableCells.Select(c =&gt; c.Text.Trim()).ToArray())
+    .ToArray();
+
+foreach (var row in table.Rows)
+{
+    Assert.That(
+        actualTable.Any(r =&gt; row.All(v =&gt; r.Contains(v.Value))),
+        string.Format("Page contains following row: {0}.", row.ToReadableString()));
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Please note that Trim() call on text of cell: it&rsquo;s important since text can be, for example, with trailing space (as it was in my case).</p>
+
+<p>So, finally I can get to actual implementation of this feature and then, running the above scenario, obtain long-awaited result.</p>
+
+<p><code>
+ViewCurrentRates : Passed
+Given I have following exchange rates in the system
+  --- table step argument ---
+  | From | To  | Rate |
+  | USD  | UAH | 8.03 |
+  | RUR  | UAH | 0.27 |
+-&gt; done: DataPreparationSteps.GivenIHaveFollowingExchangeRatesInTheSystem(&lt;table&gt;) (7,9s)
+When I am on home page
+-&gt; done: NavigationSteps.WhenIAmOnPage("home") (5,1s)
+Then I should see following rows
+  --- table step argument ---
+  | V1  | V2  | V3     |
+  | USD | UAH | 8.0300 |
+  | RUR | UAH | 0.2700 |
+-&gt; done: VerificationSteps.ThenIShouldSeeFollowingRows(&lt;table&gt;) (0,4s)
+</code></p>
+
+<p>Overall impressions: even if it adds some difficulties (especially at the beginning), I think it&rsquo;s great idea to practice BDD, and as for tooling: both SpecFlow and WatiN are nice and intuitive, and it cost quite low effort to get familiar with them (at least in this certain case).</p>
+]]></content>
+  </entry>
+  
+</feed>

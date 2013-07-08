@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Snippet | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/snippet/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Snapping To Grid]]></title>
+    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
+
+<p>```csharp
+public double SnapValue(double value, double step)
+{</p>
+
+<pre><code>var remainder = Math.IEEERemainder(value, step);
+return step/2 &gt; remainder ? value - remainder : value + remainder;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>So, assuming your you have an axis with step 0.5, value 10.2 will be snapped to 10 (closest node), and value 10.78, in turn, &ndash; to 11.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Inference of Random Value Distribution Formula]]></title>
+    <link href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
+    <updated>2012-02-29T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
+    <content type="html"><![CDATA[<p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
+
+<p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
+
+<p>So, let&rsquo;s suppose we have <code>N</code> things to happen in <code>1</code> experiment and we are running <code>K</code> experiments. What is distribution of <code>X</code> &ndash; count of certain single result appearances?</p>
+
+<p>As for me, the best way is to infer formula from simple example. Imagine, we have <code>3</code> balls in a box: <code>"1"</code>, <code>"2"</code>, <code>"3"</code>. Next, our experiment looks like this: take a ball, write its number, put it back. Given <code>4</code> experiments what results can we have?</p>
+
+<p>Let&rsquo;s write simple script to model our experiment.</p>
+
+<p>```python
+from itertools import product, groupby
+from operator import itemgetter
+c = [&ldquo;&rdquo;.join(x) for x in product(&ldquo;123&rdquo;, repeat=4)]
+d = sorted([(x, x.count(&ldquo;1&rdquo;)) for x in c], key=itemgetter(1))
+for x in d:</p>
+
+<pre><code>print(x[0] + ": " + str(x[1]))
+</code></pre>
+
+<p>```</p>
+
+<p>So, here are the results (combination itself and count of <code>"1"</code>):</p>
+
+<p><code>
+ 2222: 0
+ 2223: 0
+ 2232: 0
+ 2233: 0
+ ...
+ 3333: 0
+ 1222: 1
+ 1223: 1
+ ...
+ 1333: 1
+ 2122: 1
+ 2123: 1
+ ...
+ 3331: 1
+ 1122: 2
+ 1123: 2
+ 1132: 2
+ ...
+ 3311: 2
+ 1112: 3
+ 1113: 3
+ 1121: 3
+ ...
+ 3111: 3
+ 1111: 4
+</code></p>
+
+<p>So, let&rsquo;s start from <code>0</code> appearances. In this case combination can be composed from only <code>2</code> balls, that is <code>(N-1)</code>, since third has no appearances. OK, how much combinations we can compose from <code>2</code> balls taken <code>4</code> times? Right, <code>2^4 = 16</code>.</p>
+
+<p>Next, let&rsquo;s consider case when certain ball appears only once. Here we have slightly more complex case: we still have <code>2</code> balls and <code>3</code> positions for them, but now we can also insert third ball in the combination &ndash; <code>1xxx</code>, <code>x1xx</code> and so on. Accounting that, there are <code>C(4,1)</code> ways to do this insertion, that&rsquo;s why final count of combinations is <code>C(4,1)*2^3 = 32</code>.</p>
+
+<p>Now we have <code>2</code> appearances. This case is pretty similar to above one, but at the moment we have to pick <code>2</code> places for <code>"1"</code> and there are <code>2</code> places left for <code>"2"</code> and <code>"3"</code>. So, combinations count is <code>C(4,2)*2^2 = 24</code>.</p>
+
+<p>Next case, with <code>3</code> appearances of <code>"1"</code>, is again very similar to previous ones: we are picking <code>3</code> places for <code>"1"</code> and we have only one place for <code>"2"</code> or <code>"3"</code>. Combinations count is <code>C(4,3)*2 = 8</code>.</p>
+
+<p>Last case is the simplest one &ndash; we can have <code>4</code> appearances of <code>"1"</code> in <code>4</code> experiments only once.</p>
+
+<p>So, looking at our consideration, we can infer common formula: <code>Q(x) = C(K,x)*(N-1)^(K-x)</code>.</p>
+
+<p>Let&rsquo;s test this formula with case from Central Limit Theorem lecture. So, we have a coin and 5 flips. Due to nature of process we are expecting normal distribution. Let&rsquo;s verify that: <code>Q(x) = C(5,x)*(2-1)^(5-x) = C(5,x)</code>.</p>
+
+<p>So, our formula is correct, giving us next results:</p>
+
+<p><code>
+Q(0) = C(5,0) = 1
+Q(1) = C(5,1) = 5
+Q(2) = C(5,2) = 10
+Q(3) = C(5,3) = 10
+Q(4) = C(5,4) = 5
+Q(5) = C(5,5) = 1
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Cookie Aware WebClient (.NET)]]></title>
+    <link href="blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
+    <updated>2012-02-20T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
+    <content type="html"><![CDATA[<p>If you&rsquo;ve used WebClient to access protected content on some site, then you probably had dealt with <code>403</code> error <code>"Not authorized"</code>. In case if that site has used cookies for persisting of authentication state then most probable reason is that WebClient doesn&rsquo;t support managing cookies by default. However, this is a matter of few lines of code to implement the solution which is given above.</p>
+
+<p>```csharp
+/// <summary>
+/// Web client with cookies enabled.
+/// </summary>
+class CookieAwareWebClient : WebClient
+{</p>
+
+<pre><code>private readonly CookieContainer container = new CookieContainer();
+
+protected override WebRequest GetWebRequest(Uri address)
+{
+    var request = base.GetWebRequest(address);
+    if (request is HttpWebRequest)
+    {
+        (request as HttpWebRequest).CookieContainer = container;
+    }
+
+    return request;
+}
+
+protected override WebResponse GetWebResponse(WebRequest request)
+{
+    var response = base.GetWebResponse(request);
+    if (response is HttpWebResponse)
+    {
+        container.Add((response as HttpWebResponse).Cookies);
+    }
+
+    return response;
+}
+</code></pre>
+
+<p>}
+```</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Useful Information In Exceptions]]></title>
+    <link href="blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
+    <content type="html"><![CDATA[<p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
+
+<p>```cpp
+/*!</p>
+
+<pre><code>For internal use.
+</code></pre>
+
+<p>*/</p>
+
+<h1>define __TO_STRING(what) #what</h1>
+
+<h1>define __WHAT(message, file, line, date, time) \</h1>
+
+<pre><code>message " (" file ": " __TO_STRING(line) ", built at " date " " time ")"
+</code></pre>
+
+<p>/*!</p>
+
+<pre><code>Throws standard exception with given message and
+information about source file name, line and build date.
+</code></pre>
+
+<p>*/</p>
+
+<h1>define THROW_EXCEPTION(message) throw std::exception( \</h1>
+
+<pre><code>__WHAT(message, __FILE__, __LINE__, __DATE__, __TIME__))
+</code></pre>
+
+<p>```</p>
+
+<p>So, here is an example of usage of that macro.</p>
+
+<p>```cpp
+int main()
+{</p>
+
+<pre><code>try
+{
+    THROW_EXCEPTION("Error!");
+}
+catch(const std::exception&amp; e)
+{
+    std::cerr &lt;&lt; e.what() &lt;&lt; std::endl;
+}
+
+return 0;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>In this case STDERR will contain next line.</p>
+
+<p><code>
+Error! (d:\projects\test\main.cpp: 22, built at Nov 12 2011 13:51:15)
+</code></p>
+
+<p>Now we can explicitly see where that exception was thrown, moreover &ndash; we know when build was made.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tracing C++ Code Execution]]></title>
+    <link href="blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
+    <updated>2011-11-12T00:00:00+02:00</updated>
+    <id>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
+    <content type="html"><![CDATA[<p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
+
+<p>```cpp</p>
+
+<h1>define TRACE_BEGIN_EX(what, watch) \</h1>
+
+<pre><code>std::clog &lt;&lt; what &lt;&lt; std::endl; \
+watch.restart()
+</code></pre>
+
+<h1>define TRACE_END_EX(what, watch) \</h1>
+
+<pre><code>watch.stop(); \
+std::clog &lt;&lt; what &lt;&lt; \
+" Time: " &lt;&lt; watch.getElapsedSeconds() &lt;&lt; "s." &lt;&lt; std::endl
+</code></pre>
+
+<p>```</p>
+
+<p>Have you spotted that parameter <code>watch</code>? It is an instance of the following class.</p>
+
+<p>```cpp
+/*!</p>
+
+<pre><code>Represents stopwatch for measuring code execution time.
+</code></pre>
+
+<p>*/
+class Stopwatch
+{
+public:</p>
+
+<pre><code>/*!
+    Initializes and starts stopwatch.
+*/
+Stopwatch();
+
+/*!
+    Clears elapsed time value and starts stopwatch.
+*/
+void restart();
+
+/*!
+    Stops stopwatch.
+*/
+void stop();
+
+/*!
+    Returns number of elapsed seconds since start.
+*/
+numeric_t getElapsedSeconds() const;
+</code></pre>
+
+<p>private:</p>
+
+<pre><code>clock_t _begin;
+numeric_t _length;
+</code></pre>
+
+<p>};
+```</p>
+
+<p>If you wonder what is <code>numeric_t</code> &ndash; this is nothing but simple alias of <code>float</code>. So, lets see an example of usage (excerpt from the source code).</p>
+
+<p>```cpp
+&hellip;
+TRACE_BEGIN_EX(&ldquo;Application started (MPI process #&rdquo;</p>
+
+<pre><code>    &lt;&lt; _processIndex &lt;&lt; ").", _watch);
+</code></pre>
+
+<p>&hellip;
+TRACE_END_EX(&ldquo;Application finished (MPI process #&rdquo;</p>
+
+<pre><code>    &lt;&lt; _processIndex &lt;&lt; ").", _watch);
+</code></pre>
+
+<p>```</p>
+
+<p>It will be more useful if we&rsquo;ll introduce few new macros.</p>
+
+<p>```cpp</p>
+
+<h1>define TRACE_PREPARE \</h1>
+
+<pre><code>Stopwatch __trace_stopwatch; \
+std::ostringstream __trace_ostream; \
+std::string __trace_subject
+</code></pre>
+
+<h1>define TRACE_BEGIN(what) \</h1>
+
+<pre><code>__trace_ostream.str(std::string()); \
+__trace_ostream &lt;&lt; what; \
+__trace_subject = __trace_ostream.str(); \
+TRACE_BEGIN_EX("Started: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE_END \</h1>
+
+<pre><code>TRACE_END_EX("Finished: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE(message, action) \</h1>
+
+<pre><code>TRACE_BEGIN(message); \
+{action;} \
+TRACE_END
+</code></pre>
+
+<p>```</p>
+
+<p>So now we are able to write something like this (excerpt from source code of image fusion application).</p>
+
+<p>```cpp
+TRACE(&ldquo;transformation and transfer of fused image&rdquo;,
+{</p>
+
+<pre><code>saveChannel(0);
+saveChannel(1);
+saveChannel(2);
+</code></pre>
+
+<p>});
+```</p>
+
+<p>OK, once we have compiled and run application, we can see something like this.</p>
+
+<p><code>
+...
+Started: transformation and transfer of fused image.
+Finished: transformation and transfer of fused image. Time: 0.15s.
+...
+</code></p>
+
+<p>Good, but what if we releasing production version and tracing no more needed? That&rsquo;s simple! Lets change our macros.</p>
+
+<p>```cpp</p>
+
+<h1>if defined(_TRACE)</h1>
+
+<h1>include <iostream></h1>
+
+<h1>include <sstream></h1>
+
+<h1>include &ldquo;Stopwatch.h&rdquo;</h1>
+
+<h1>define TRACE_BEGIN_EX(what, watch) \</h1>
+
+<pre><code>std::clog &lt;&lt; what &lt;&lt; std::endl; \
+watch.restart()
+</code></pre>
+
+<h1>define TRACE_END_EX(what, watch) \</h1>
+
+<pre><code>watch.stop(); \
+std::clog &lt;&lt; what &lt;&lt; \
+" Time: " &lt;&lt; watch.getElapsedSeconds() &lt;&lt; "s." &lt;&lt; std::endl
+</code></pre>
+
+<h1>define TRACE_PREPARE \</h1>
+
+<pre><code>Stopwatch __trace_stopwatch; \
+std::ostringstream __trace_ostream; \
+std::string __trace_subject
+</code></pre>
+
+<h1>define TRACE_BEGIN(what) \</h1>
+
+<pre><code>__trace_ostream.str(std::string()); \
+__trace_ostream &lt;&lt; what; \
+__trace_subject = __trace_ostream.str(); \
+TRACE_BEGIN_EX("Started: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE_END \</h1>
+
+<pre><code>TRACE_END_EX("Finished: " &lt;&lt; __trace_subject &lt;&lt; ".", __trace_stopwatch)
+</code></pre>
+
+<h1>define TRACE(message, action) \</h1>
+
+<pre><code>TRACE_BEGIN(message); \
+{action;} \
+TRACE_END
+</code></pre>
+
+<h1>else</h1>
+
+<h1>define TRACE_BEGIN_EX(what, watch)</h1>
+
+<h1>define TRACE_END_EX(what, watch)</h1>
+
+<h1>define TRACE_PREPARE</h1>
+
+<h1>define TRACE_BEGIN(what)</h1>
+
+<h1>define TRACE_END</h1>
+
+<h1>define TRACE(message, action) {action;}</h1>
+
+<h1>endif</h1>
+
+<p>```</p>
+
+<p>So now if we&rsquo;ll compile our code without <code>_TRACE</code> being defined, tracing simply disappears and doesn&rsquo;t have any impact on performance.</p>
+
+<p>To summarize, these simple but quite powerful macros let us easily trace our code execution (including time of execution), and at the same time we have an option to disable it by simply not defining <code>_TRACE</code> macro.</p>
+]]></content>
+  </entry>
+  
+</feed>

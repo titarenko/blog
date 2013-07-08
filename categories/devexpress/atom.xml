@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: DevExpress | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/devexpress/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[When IList Has Indexer But Does Not Have Enumerator]]></title>
+    <link href="blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
+    <updated>2012-04-29T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
+    <content type="html"><![CDATA[<p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
+
+<p>Imagine you are implementing handler for some controller&rsquo;s action where you need to access all items from <code>ListView</code>:</p>
+
+<p><code>csharp
+...
+var records = listView.CollectionSource.List.Cast&lt;MyType&gt;().ToList();
+...
+</code></p>
+
+<p>Instance <code>listView.CollectionSource.List</code> is of type implementing <code>IList</code>, so you can expect reference to list of <code>MyType</code> instances in the <code>records</code> variable, but you&rsquo;ll receive <code>System.NotSupportedException</code>!</p>
+
+<p>```
+  System.NotSupportedException was unhandled by user code
+  Message=Specified method is not supported.
+  Source=DevExpress.Xpo.v10.2
+  StackTrace:</p>
+
+<pre><code>   at DevExpress.Xpo.Helpers.XpoServerCollectionAdderRemover.GetEnumerator()
+   at DevExpress.Xpo.Helpers.XpoServerCollectionWrapperBase.GetEnumerator()
+   at System.Linq.Enumerable.&lt;CastIterator&gt;d__aa`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at MyProject.MyController.HandleMyAction(Object sender, SimpleActionExecuteEventArgs e)
+   at DevExpress.ExpressApp.Actions.SimpleAction.RaiseExecute(ActionBaseEventArgs eventArgs)
+   at DevExpress.ExpressApp.Actions.ActionBase.ExecuteCore(Delegate handler, ActionBaseEventArgs eventArgs)
+</code></pre>
+
+<p>```</p>
+
+<p>So, what should you do? Use indexer!</p>
+
+<p><code>csharp
+...
+var records = Enumerable.Range(0, listView.CollectionSource.List.Count).Select(
+  index =&gt; listView.CollectionSource.List[index] as MyType).ToList();
+...
+</code></p>
+
+<p>Is it so hard for framework developers to implement enumerator if type already has indexer? I think no. So it&rsquo;s very strange that we should bother ourselves with such things. But anyway the solution is not so hard, so generally everything is OK.</p>
+
+<p><em>P. S.</em> Also it&rsquo;s quite strange and unintuitive that we should access items of list view through <code>listView.CollectionSource.List</code> instead of <code>listView.List</code> or <code>listView.Items</code>, especially, when such properties do exist, but intended for another purposes (internal). But that is another story.</p>
+]]></content>
+  </entry>
+  
+</feed>

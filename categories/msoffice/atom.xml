@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MSOffice | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/msoffice/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Extracting Tables from Microsoft Word 2007+ (OpenXML) Document]]></title>
+    <link href="blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/"/>
+    <updated>2012-04-03T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose we have huge Word 2007+ document (*.docx) with lots of tables and we want to extract that information for further processing. Since our document is based on OpenXML format I would say &ldquo;No problem! Let&rsquo;s do it!&rdquo;.</p>
+
+<p>First, we need to open zip archive (each *.docx is zipped set of XML files). For this purpose we can use great library DotNetZip (just use NuGet to obtain it). Right after this we&rsquo;ll read word/document.xml entry.</p>
+
+<p>```csharp
+static void Main(string[] args)
+{</p>
+
+<pre><code>using (var file = ZipFile.Read(args[0]))
+using (var inputStream = file["word/document.xml"].OpenReader())
+{
+    var document = new XmlDocument();
+    document.Load(inputStream);
+
+    var tables = ExtractTables(document);
+
+    using (var outputStream = File.Create(args[1]))
+    {
+        new XmlSerializer(typeof(Table[])).Serialize(outputStream, tables);
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Then we&rsquo;ll extract neccessary pieces using XPath: our target is <code>w:tbl</code> nodes (tables) with such descendants as <code>w:tr</code> (rows), <code>w:tc</code> (cells) and <code>w:t</code> (text pieces).</p>
+
+<p>```csharp
+private static Table[] ExtractTables(XmlNode document)
+{</p>
+
+<pre><code>return document.Select("//w:tbl", tableNode =&gt; new Table
+{
+    Rows = tableNode.Select(".//w:tr", rowNode =&gt; new Row
+    {
+        Cells = rowNode.Select(".//w:tc", cellNode =&gt; new Cell
+        {
+            Text = cellNode.Select(".//w:t", textNode =&gt; textNode.InnerText)
+        })
+    })
+});
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Classes <code>Table</code>, <code>Row</code> and <code>Cell</code> are simple DTOs used for simplifying of result serialization.</p>
+
+<p>One more thing is <code>.Select()</code> extension method &ndash; it&rsquo;s implemented in the following way:</p>
+
+<p>```csharp
+public static T[] Select<T>(this XmlNode node, string xpath, Func&lt;XmlNode, T> selector)
+{</p>
+
+<pre><code>return node
+    .SelectNodes(xpath, GetOrCreateNamespaceManager((node as XmlDocument ?? node.OwnerDocument).NameTable))
+    .Cast&lt;XmlNode&gt;()
+    .Select(selector)
+    .ToArray();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Method .GetOrCreateNamespaceManager() returns namespace manager as it&rsquo;s required for making of XPath queries with use of namespaces. There is only one parameter for it &ndash; name table instance.</p>
+
+<p>```csharp
+private static XmlNamespaceManager GetOrCreateNamespaceManager(XmlNameTable nameTable)
+{</p>
+
+<pre><code>if (manager == null)
+{
+    manager = new XmlNamespaceManager(nameTable);
+    manager.AddNamespace("w", "http://schemas.openxmlformats.org/wordprocessingml/2006/main");
+}
+
+return manager;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>That&rsquo;s it! Due to openness of new Word document&rsquo;s format our initial task is so simple in implementation that it takes no more than couple of hours to implement it.</p>
+]]></content>
+  </entry>
+  
+</feed>

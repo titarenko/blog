@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Deployment | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/deployment/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ASP.NET MVC - Preparing for Deployment]]></title>
+    <link href="blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
+    <updated>2012-07-17T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
+    <content type="html"><![CDATA[<p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
+
+<p>I found that msbuild itself allows to do packaging for deployment (but very few developers were recommending to use it for real-life deployment).</p>
+
+<p>Other option was use of NAnt &ndash; but disadvantages were that it needs to write configuration in XML, which is quite verbose way of expressing things, and also it has little or no development activity as for now.</p>
+
+<p>But then I spotted <a href="https://github.com/psake/psake">psake</a> which seemed to be like rake, but for PowerShell, not Ruby. I even read nice post with real life example from <a href="http://ayende.com/blog/4156/on-psake" title="">Ayende</a>.</p>
+
+<p>So, decision was made &ndash; packaging will be done by script written in PowerShell. Advantages:</p>
+
+<ul>
+<li>no need in additional interpreter/dependencies (as in case with rake)</li>
+<li>ability to use .NET types from script</li>
+<li>quite expressive language and decent syntax</li>
+<li>no need to write tons of XML</li>
+</ul>
+
+
+<p>So, for one of projects, I even didn&rsquo;t use psake and expressed everything in plain PowerShell with only dependency on 7-zip for creating zip archive and it&rsquo;s only few lines of clean and understandable code &ndash; you can look at it <a href="https://github.com/titarenko/ClientManager/blob/master/BinaryStudio.ClientManager.WebUi/Deployment/Package.ps1">here, on Github</a> (it&rsquo;s well commented, so it&rsquo;s good place to start if you haven&rsquo;t written such things before).</p>
+]]></content>
+  </entry>
+  
+</feed>

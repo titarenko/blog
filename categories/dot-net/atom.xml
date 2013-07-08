@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: .NET | Constantin Titarenko's Blog]]></title>
+  <link href="blog.titarenko.info/categories/dot-net/atom.xml" rel="self"/>
+  <link href="blog.titarenko.info/"/>
+  <updated>2013-07-08T20:39:33+03:00</updated>
+  <id>blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ASP.NET MVC - Preparing for Deployment]]></title>
+    <link href="blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
+    <updated>2012-07-17T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
+    <content type="html"><![CDATA[<p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
+
+<p>I found that msbuild itself allows to do packaging for deployment (but very few developers were recommending to use it for real-life deployment).</p>
+
+<p>Other option was use of NAnt &ndash; but disadvantages were that it needs to write configuration in XML, which is quite verbose way of expressing things, and also it has little or no development activity as for now.</p>
+
+<p>But then I spotted <a href="https://github.com/psake/psake">psake</a> which seemed to be like rake, but for PowerShell, not Ruby. I even read nice post with real life example from <a href="http://ayende.com/blog/4156/on-psake" title="">Ayende</a>.</p>
+
+<p>So, decision was made &ndash; packaging will be done by script written in PowerShell. Advantages:</p>
+
+<ul>
+<li>no need in additional interpreter/dependencies (as in case with rake)</li>
+<li>ability to use .NET types from script</li>
+<li>quite expressive language and decent syntax</li>
+<li>no need to write tons of XML</li>
+</ul>
+
+
+<p>So, for one of projects, I even didn&rsquo;t use psake and expressed everything in plain PowerShell with only dependency on 7-zip for creating zip archive and it&rsquo;s only few lines of clean and understandable code &ndash; you can look at it <a href="https://github.com/titarenko/ClientManager/blob/master/BinaryStudio.ClientManager.WebUi/Deployment/Package.ps1">here, on Github</a> (it&rsquo;s well commented, so it&rsquo;s good place to start if you haven&rsquo;t written such things before).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[NullReferenceException from the Entity Framework Core]]></title>
+    <link href="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
+    <updated>2012-06-10T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
+    <content type="html"><![CDATA[<p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
+
+<p>```csharp
+public ActionResult Index()
+{</p>
+
+<pre><code>return View(repository.Query&lt;Story&gt;().ToList());
+// repository.Query&lt;Story&gt;() here is nothing but (DbQuery&lt;Story&gt;) context.Stories
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here is the stack trace:</p>
+
+<p><code>
+[NullReferenceException: Object reference not set to an instance of an object.]
+   System.Data.Objects.ELinq.QueryParameterExpression.EvaluateParameter(Object[] arguments) +83
+   System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan(Nullable`1 forMergeOption) +779
+   System.Data.Objects.ObjectQuery`1.GetResults(Nullable`1 forMergeOption) +149
+   System.Data.Objects.ObjectQuery`1.System.Collections.Generic.IEnumerable&lt;T&gt;.GetEnumerator() +44
+   System.Data.Entity.Internal.Linq.InternalQuery`1.GetEnumerator() +40
+   System.Data.Entity.Infrastructure.DbQuery`1.System.Collections.Generic.IEnumerable&lt;TResult&gt;.GetEnumerator() +40
+   System.Collections.Generic.List`1..ctor(IEnumerable`1 collection) +315
+   System.Linq.Enumerable.ToList(IEnumerable`1 source) +58
+   QTeam.PlanningBoard.Controllers.StoriesController.Index() in ...QTeam.PlanningBoard\Controllers\StoriesController.cs:26
+   lambda_method(Closure , ControllerBase , Object[] ) +97
+   System.Web.Mvc.ActionMethodDispatcher.Execute(ControllerBase controller, Object[] parameters) +17
+   System.Web.Mvc.ReflectedActionDescriptor.Execute(ControllerContext controllerContext, IDictionary`2 parameters) +208
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethod(ControllerContext controllerContext, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +27
+   System.Web.Mvc.&lt;&gt;c__DisplayClass15.&lt;InvokeActionMethodWithFilters&gt;b__12() +55
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodFilter(IActionFilter filter, ActionExecutingContext preContext, Func`1 continuation) +263
+   System.Web.Mvc.&lt;&gt;c__DisplayClass17.&lt;InvokeActionMethodWithFilters&gt;b__14() +19
+   System.Web.Mvc.ControllerActionInvoker.InvokeActionMethodWithFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor, IDictionary`2 parameters) +191
+   System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName) +343
+   System.Web.Mvc.Controller.ExecuteCore() +116
+   System.Web.Mvc.ControllerBase.Execute(RequestContext requestContext) +97
+   System.Web.Mvc.ControllerBase.System.Web.Mvc.IController.Execute(RequestContext requestContext) +10
+   System.Web.Mvc.&lt;&gt;c__DisplayClassb.&lt;BeginProcessRequest&gt;b__5() +37
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass1.&lt;MakeVoidDelegate&gt;b__0() +21
+   System.Web.Mvc.Async.&lt;&gt;c__DisplayClass8`1.&lt;BeginSynchronous&gt;b__7(IAsyncResult _) +12
+   System.Web.Mvc.Async.WrappedAsyncResult`1.End() +62
+   System.Web.Mvc.&lt;&gt;c__DisplayClasse.&lt;EndProcessRequest&gt;b__d() +50
+   System.Web.Mvc.SecurityUtil.&lt;GetCallInAppTrustThunk&gt;b__0(Action f) +7
+   System.Web.Mvc.SecurityUtil.ProcessInApplicationTrust(Action action) +22
+   System.Web.Mvc.MvcHandler.EndProcessRequest(IAsyncResult asyncResult) +60
+   System.Web.Mvc.MvcHandler.System.Web.IHttpAsyncHandler.EndProcessRequest(IAsyncResult result) +9
+   System.Web.CallHandlerExecutionStep.System.Web.HttpApplication.IExecutionStep.Execute() +8970061
+   System.Web.HttpApplication.ExecuteStep(IExecutionStep step, Boolean&amp; completedSynchronously) +184
+</code></p>
+
+<p>Reading such stack trace can mislead you that cause is not in app code but somewhere in the EF itself. This is because lazy enumeration &ndash; after a little bit deeper analysis I found that I have such code:</p>
+
+<p>```csharp
+/// <summary>
+/// Queries data for current tenant.
+/// </summary>
+private IQueryable<T> QueryFilteredInternal<T>(params Expression&lt;Func&lt;T, object>>[] eagerlyLoadedProperties) where T : class, IIdentifiable, IOwned
+{</p>
+
+<pre><code>return repository
+    .Query(eagerlyLoadedProperties)
+    .Where(x =&gt; x.OwnerId == userService.CurrentUser.Id);
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Here <code>userService.CurrentUser</code> was null, so when EF tried to access <code>userService.CurrentUser.Id</code> for providing parameter value to query, <code>NullReferenceException</code> was occuring.</p>
+
+<p>So, summary is: don&rsquo;t fully rely on call stack investigating cause for exceptions while working with lazy evaluated things.</p>
+
+<p><em>P. S.</em> In the early beginning first thing I did was googling for stack trace. It gave me nothing but <a href="https://www.google.com.ua/search?sugexp=chrome,mod=7&amp;sourceid=chrome&amp;ie=UTF-8&amp;q=at+System.Data.Objects.ELinq.QueryParameterExpression.EvaluateParameter%28Object%5B%5D+arguments%29at+System.Data.Objects.ELinq.ELinqQueryState.GetExecutionPlan%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.GetResults%28Nullable%601+forMergeOption%29at+System.Data.Objects.ObjectQuery%601.System.Collections.Generic.IEnumerable%3CT%3E.GetEnumerator%28%29at+System.Data.Entity.Internal.Linq.InternalQuery%601.GetEnumerator%28%29at+System.Data.Entity.Infrastructure.DbQuery%601.System.Collections.Generic.IEnumerable%3CTResult%3E.GetEnumerator%28%29at+System.Collections.Generic.List%601..ctor%28IEnumerable%601+collection%29at+System.Linq.Enumerable.ToList%5BTSource%5D%28IEnumerable%601+source%29">links to failing sites</a> and not to articles with solutions, as was expected, so I hope this post will be helpful for someone who will issue similar search query.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Snapping To Grid]]></title>
+    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
+
+<p>```csharp
+public double SnapValue(double value, double step)
+{</p>
+
+<pre><code>var remainder = Math.IEEERemainder(value, step);
+return step/2 &gt; remainder ? value - remainder : value + remainder;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>So, assuming your you have an axis with step 0.5, value 10.2 will be snapped to 10 (closest node), and value 10.78, in turn, &ndash; to 11.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[ASP.NET File Upload Possible Issue]]></title>
+    <link href="blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
+    <updated>2012-05-22T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
+    <content type="html"><![CDATA[<p>One of issues you can face when developing web application with use of ASP.NET MVC and IIS 7.5 is maximal request size. No doubt, after googling, you&rsquo;ll find that cause is request size limit, so you&rsquo;ll happily add to web.config following line and forget about this.</p>
+
+<p><code>xml
+&lt;httpRuntime maxRequestLength="100000"/&gt;
+</code></p>
+
+<p>But if under some circumstances you&rsquo;ll find that controller&rsquo;s action responsible for receiving of large file is not being triggered but instead application returns 404 code, try following solution. Please note, in this case content length should be provided in bytes, not kilobytes like in prevous example.</p>
+
+<p>```xml
+<security></p>
+
+<pre><code>&lt;requestFiltering&gt;
+    &lt;requestLimits maxAllowedContentLength="100000000" /&gt;
+&lt;/requestFiltering&gt;
+</code></pre>
+
+<p></security>
+```</p>
+
+<p>For me, while working with Windows integrated authentication, this helped a lot. Thanks to <a href="http://stackoverflow.com/a/6687932">StackOverflow</a>!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[When IList Has Indexer But Does Not Have Enumerator]]></title>
+    <link href="blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
+    <updated>2012-04-29T00:00:00+03:00</updated>
+    <id>blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
+    <content type="html"><![CDATA[<p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
+
+<p>Imagine you are implementing handler for some controller&rsquo;s action where you need to access all items from <code>ListView</code>:</p>
+
+<p><code>csharp
+...
+var records = listView.CollectionSource.List.Cast&lt;MyType&gt;().ToList();
+...
+</code></p>
+
+<p>Instance <code>listView.CollectionSource.List</code> is of type implementing <code>IList</code>, so you can expect reference to list of <code>MyType</code> instances in the <code>records</code> variable, but you&rsquo;ll receive <code>System.NotSupportedException</code>!</p>
+
+<p>```
+  System.NotSupportedException was unhandled by user code
+  Message=Specified method is not supported.
+  Source=DevExpress.Xpo.v10.2
+  StackTrace:</p>
+
+<pre><code>   at DevExpress.Xpo.Helpers.XpoServerCollectionAdderRemover.GetEnumerator()
+   at DevExpress.Xpo.Helpers.XpoServerCollectionWrapperBase.GetEnumerator()
+   at System.Linq.Enumerable.&lt;CastIterator&gt;d__aa`1.MoveNext()
+   at System.Collections.Generic.List`1..ctor(IEnumerable`1 collection)
+   at System.Linq.Enumerable.ToList[TSource](IEnumerable`1 source)
+   at MyProject.MyController.HandleMyAction(Object sender, SimpleActionExecuteEventArgs e)
+   at DevExpress.ExpressApp.Actions.SimpleAction.RaiseExecute(ActionBaseEventArgs eventArgs)
+   at DevExpress.ExpressApp.Actions.ActionBase.ExecuteCore(Delegate handler, ActionBaseEventArgs eventArgs)
+</code></pre>
+
+<p>```</p>
+
+<p>So, what should you do? Use indexer!</p>
+
+<p><code>csharp
+...
+var records = Enumerable.Range(0, listView.CollectionSource.List.Count).Select(
+  index =&gt; listView.CollectionSource.List[index] as MyType).ToList();
+...
+</code></p>
+
+<p>Is it so hard for framework developers to implement enumerator if type already has indexer? I think no. So it&rsquo;s very strange that we should bother ourselves with such things. But anyway the solution is not so hard, so generally everything is OK.</p>
+
+<p><em>P. S.</em> Also it&rsquo;s quite strange and unintuitive that we should access items of list view through <code>listView.CollectionSource.List</code> instead of <code>listView.List</code> or <code>listView.Items</code>, especially, when such properties do exist, but intended for another purposes (internal). But that is another story.</p>
+]]></content>
+  </entry>
+  
+</feed>

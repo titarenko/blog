@@ -1,0 +1,412 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>BDD with SpecFlow and WatiN - Constantin Titarenko's Blog</title>
+  <meta name="author" content="Constantin Titarenko">
+
+  
+  <meta name="description" content="I&rsquo;ve long heard about BDD, and recently viewed lectures from SaaS class really interested me not only in Ruby (with such great frameworks as &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Constantin Titarenko's Blog" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Constantin Titarenko's Blog</a></h1>
+  
+    <h2>Notes regarding software development.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:blog.titarenko.info" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">BDD With SpecFlow and WatiN</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-24T00:00:00+02:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I&rsquo;ve long heard about BDD, and recently viewed lectures from <a href="http://saas-class.org">SaaS class</a> really interested me not only in Ruby (with such great frameworks as Rails and Cucumber), but also in practical use of this methodology in .NET, which is my main platform at the moment. So, I decided to try writing small web app using BDD approach assisted by SpecFlow tool for definition of features and latter execution of test based on them, and WatiN as tool which would help to grab content from browser to make assertions on expected results.</p>
+
+<p>Here is the feature file:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> Viewing of rates</span>
+</span><span class='line'><span class="nf"> In order to view available conversion rates</span>
+</span><span class='line'><span class="nf"> As a user</span>
+</span><span class='line'><span class="nf"> I want to see current rates as well as their changes history</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">Scenario:</span><span class="nf"> View current rates</span>
+</span><span class='line'><span class="k">  Given </span><span class="nf">I have following exchange rates in the system</span>
+</span><span class='line'><span class="k">      |</span><span class="s"> From</span><span class="k"> |</span><span class="s"> To  </span><span class="k">|</span><span class="s"> Rate</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="k">      |</span><span class="s"> USD  </span><span class="k">|</span><span class="s"> UAH</span><span class="k"> |</span><span class="s"> 8.03</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="k">      |</span><span class="s"> RUR  </span><span class="k">|</span><span class="s"> UAH</span><span class="k"> |</span><span class="s"> 0.27</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="nf"> </span><span class="k">When </span><span class="nf">I am on home page</span>
+</span><span class='line'><span class="nf"> </span><span class="k">Then </span><span class="nf">I should see following rows</span>
+</span><span class='line'><span class="k">      |</span><span class="s"> V1  </span><span class="k">|</span><span class="s"> V2  </span><span class="k">|</span><span class="s"> V3    </span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="k">      |</span><span class="s"> USD</span><span class="k"> |</span><span class="s"> UAH</span><span class="k"> |</span><span class="s"> 8.0300</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="k">      |</span><span class="s"> RUR</span><span class="k"> |</span><span class="s"> UAH</span><span class="k"> |</span><span class="s"> 0.2700</span><span class="k"> |</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Implementation of most steps is pretty straightforward and not listed here, except &ldquo;Then&rdquo; step. So, below is its initial implementation.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="na">[Then(@&quot;I should see following rows&quot;)]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">ThenIShouldSeeFollowingRows</span><span class="p">(</span><span class="n">Table</span> <span class="n">table</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">row</span> <span class="k">in</span> <span class="n">table</span><span class="p">.</span><span class="n">Rows</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">Browser</span><span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;exchange-rates&quot;</span><span class="p">).</span><span class="n">TableRows</span><span class="p">.</span><span class="n">Any</span><span class="p">(</span>
+</span><span class='line'>                <span class="n">exchangeRate</span> <span class="p">=&gt;</span> <span class="n">row</span><span class="p">.</span><span class="n">Values</span><span class="p">.</span><span class="n">All</span><span class="p">(</span>
+</span><span class='line'>                    <span class="n">text</span> <span class="p">=&gt;</span> <span class="n">exchangeRate</span><span class="p">.</span><span class="n">TableCell</span><span class="p">(</span><span class="n">Find</span><span class="p">.</span><span class="n">ByText</span><span class="p">(</span><span class="n">text</span><span class="p">)).</span><span class="n">Exists</span><span class="p">)),</span>
+</span><span class='line'>            <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Page contains following row: {0}.&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">.</span><span class="n">ToReadableString</span><span class="p">()));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Being WatiN newbie, I&rsquo;d made a step on a rake and trial to execute scenario led to StackOverflowException in WatiN.Core, so after googling a bit I decided to parse table first and only then make assertions. Said &ndash; done: updated implementation is below.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">csharp</span><span class="p">[</span><span class="n">Then</span><span class="p">(</span><span class="s">@&quot;I should see following rows&quot;</span><span class="p">)]</span>
+</span><span class='line'><span class="k">public</span> <span class="k">void</span> <span class="nf">ThenIShouldSeeFollowingRows</span><span class="p">(</span><span class="n">Table</span> <span class="n">table</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="kt">var</span> <span class="n">actualTable</span> <span class="p">=</span> <span class="n">Browser</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Table</span><span class="p">(</span><span class="s">&quot;exchange-rates&quot;</span><span class="p">)</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">TableRows</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">TableCells</span><span class="p">.</span><span class="n">Any</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">TableCells</span><span class="p">.</span><span class="n">Select</span><span class="p">(</span><span class="n">c</span> <span class="p">=&gt;</span> <span class="n">c</span><span class="p">.</span><span class="n">Text</span><span class="p">.</span><span class="n">Trim</span><span class="p">()).</span><span class="n">ToArray</span><span class="p">())</span>
+</span><span class='line'>        <span class="p">.</span><span class="n">ToArray</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="kt">var</span> <span class="n">row</span> <span class="k">in</span> <span class="n">table</span><span class="p">.</span><span class="n">Rows</span><span class="p">)</span>
+</span><span class='line'>    <span class="p">{</span>
+</span><span class='line'>        <span class="n">Assert</span><span class="p">.</span><span class="n">That</span><span class="p">(</span>
+</span><span class='line'>            <span class="n">actualTable</span><span class="p">.</span><span class="n">Any</span><span class="p">(</span><span class="n">r</span> <span class="p">=&gt;</span> <span class="n">row</span><span class="p">.</span><span class="n">All</span><span class="p">(</span><span class="n">v</span> <span class="p">=&gt;</span> <span class="n">r</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">v</span><span class="p">.</span><span class="n">Value</span><span class="p">))),</span>
+</span><span class='line'>            <span class="kt">string</span><span class="p">.</span><span class="n">Format</span><span class="p">(</span><span class="s">&quot;Page contains following row: {0}.&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">.</span><span class="n">ToReadableString</span><span class="p">()));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Please note that Trim() call on text of cell: it&rsquo;s important since text can be, for example, with trailing space (as it was in my case).</p>
+
+<p>So, finally I can get to actual implementation of this feature and then, running the above scenario, obtain long-awaited result.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="n">ViewCurrentRates</span> <span class="p">:</span> <span class="n">Passed</span>
+</span><span class='line'><span class="n">Given</span> <span class="n">I</span> <span class="n">have</span> <span class="n">following</span> <span class="n">exchange</span> <span class="n">rates</span> <span class="k">in</span> <span class="n">the</span> <span class="n">system</span>
+</span><span class='line'>  <span class="p">---</span> <span class="n">table</span> <span class="n">step</span> <span class="n">argument</span> <span class="p">---</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">From</span> <span class="p">|</span> <span class="n">To</span>  <span class="p">|</span> <span class="n">Rate</span> <span class="p">|</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">USD</span>  <span class="p">|</span> <span class="n">UAH</span> <span class="p">|</span> <span class="m">8.03</span> <span class="p">|</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">RUR</span>  <span class="p">|</span> <span class="n">UAH</span> <span class="p">|</span> <span class="m">0.27</span> <span class="p">|</span>
+</span><span class='line'><span class="p">-&gt;</span> <span class="n">done</span><span class="p">:</span> <span class="n">DataPreparationSteps</span><span class="p">.</span><span class="n">GivenIHaveFollowingExchangeRatesInTheSystem</span><span class="p">(&lt;</span><span class="n">table</span><span class="p">&gt;)</span> <span class="p">(</span><span class="m">7</span><span class="p">,</span><span class="m">9</span><span class="n">s</span><span class="p">)</span>
+</span><span class='line'><span class="n">When</span> <span class="n">I</span> <span class="n">am</span> <span class="n">on</span> <span class="n">home</span> <span class="n">page</span>
+</span><span class='line'><span class="p">-&gt;</span> <span class="n">done</span><span class="p">:</span> <span class="n">NavigationSteps</span><span class="p">.</span><span class="n">WhenIAmOnPage</span><span class="p">(</span><span class="s">&quot;home&quot;</span><span class="p">)</span> <span class="p">(</span><span class="m">5</span><span class="p">,</span><span class="m">1</span><span class="n">s</span><span class="p">)</span>
+</span><span class='line'><span class="n">Then</span> <span class="n">I</span> <span class="n">should</span> <span class="n">see</span> <span class="n">following</span> <span class="n">rows</span>
+</span><span class='line'>  <span class="p">---</span> <span class="n">table</span> <span class="n">step</span> <span class="n">argument</span> <span class="p">---</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">V1</span>  <span class="p">|</span> <span class="n">V2</span>  <span class="p">|</span> <span class="n">V3</span>     <span class="p">|</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">USD</span> <span class="p">|</span> <span class="n">UAH</span> <span class="p">|</span> <span class="m">8.0300</span> <span class="p">|</span>
+</span><span class='line'>  <span class="p">|</span> <span class="n">RUR</span> <span class="p">|</span> <span class="n">UAH</span> <span class="p">|</span> <span class="m">0.2700</span> <span class="p">|</span>
+</span><span class='line'><span class="p">-&gt;</span> <span class="n">done</span><span class="p">:</span> <span class="n">VerificationSteps</span><span class="p">.</span><span class="n">ThenIShouldSeeFollowingRows</span><span class="p">(&lt;</span><span class="n">table</span><span class="p">&gt;)</span> <span class="p">(</span><span class="m">0</span><span class="p">,</span><span class="m">4</span><span class="n">s</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Overall impressions: even if it adds some difficulties (especially at the beginning), I think it&rsquo;s great idea to practice BDD, and as for tooling: both SpecFlow and WatiN are nice and intuitive, and it cost quite low effort to get familiar with them (at least in this certain case).</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Constantin Titarenko</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-24T00:00:00+02:00" pubdate data-updated="true">Mar 24<span>th</span>, 2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/categories/dot-net/'>.NET</a>, <a class='category' href='/categories/testing/'>Testing</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/" data-via="ctitarenko" data-counturl="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/2012/02/29/inference-of-random-value-distribution-formula/" title="Previous Post: Inference of Random Value Distribution Formula">&laquo; Inference of Random Value Distribution Formula</a>
+      
+      
+        <a class="basic-alignment right" href="/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/" title="Next Post: Extracting Tables from Microsoft Word 2007+ (OpenXML) Document">Extracting Tables from Microsoft Word 2007+ (OpenXML) Document &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/2012/10/05/why-programmer-must-have-math-background/">Why Programmer Must Have Math Background</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/07/17/asp-net-mvc-preparing-for-deployment/">ASP.NET MVC - Preparing for Deployment</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/06/10/nullreferenceexception-from-the-entity-framework-core/">NullReferenceException From the Entity Framework Core</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/snapping-to-grid/">Snapping to Grid</a>
+      </li>
+    
+      <li class="post">
+        <a href="/2012/05/22/asp-net-file-upload-possible-issue/">ASP.NET File Upload Possible Issue</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/titarenko">@titarenko</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'titarenko',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Constantin Titarenko -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'titarenko-blog';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/';
+        var disqus_url = 'blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
