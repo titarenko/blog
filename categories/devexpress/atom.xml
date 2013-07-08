@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: DevExpress | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/devexpress/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/devexpress/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[When IList Has Indexer But Does Not Have Enumerator]]></title>
-    <link href="blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
+    <link href="http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
     <updated>2012-04-29T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
+    <id>http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
     <content type="html"><![CDATA[<p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
 
 <p>Imagine you are implementing handler for some controller&rsquo;s action where you need to access all items from <code>ListView</code>:</p>

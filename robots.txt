@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: blog.titarenko.info/sitemap.xml 
+Sitemap: http://blog.titarenko.info/sitemap.xml 

@@ -1,95 +1,97 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>blog.titarenko.info/2011/10/05/cuda-cuvec/</loc>
+        <loc>http://blog.titarenko.info/2011/10/05/cuda-cuvec/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/</loc>
+        <loc>http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2011/11/12/useful-info-inexceptions/</loc>
+        <loc>http://blog.titarenko.info/2011/11/12/useful-info-inexceptions/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing/</loc>
+        <loc>http://blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing/</loc>
         <lastmod>2013-07-08T20:21:24+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
-    </url>
-    <url>
-        <loc>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
-    </url>
-    <url>
-        <loc>blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/</loc>
+        <loc>http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
         <loc>
-            blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/
+            http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/
+        </loc>
+        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+    </url>
+    <url>
+        <loc>http://blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/</loc>
+        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/
         </loc>
         <lastmod>2013-07-08T20:21:24+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/</loc>
+        <loc>http://blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
         <loc>
-            blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/
+            http://blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/
         </loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
         <loc>
-            blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/
+            http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/
         </loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/</loc>
+        <loc>http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/05/22/snapping-to-grid/</loc>
+        <loc>http://blog.titarenko.info/2012/05/22/snapping-to-grid/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
         <loc>
-            blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/
+            http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/
         </loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/</loc>
+        <loc>http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/</loc>
+        <loc>http://blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/blog/archives/</loc>
+        <loc>http://blog.titarenko.info/blog/archives/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/blog/</loc>
+        <loc>http://blog.titarenko.info/blog/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/404.html</loc>
+        <loc>http://blog.titarenko.info/404.html</loc>
         <lastmod>2013-07-08T20:20:38+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/robots.txt</loc>
+        <loc>http://blog.titarenko.info/robots.txt</loc>
         <lastmod>2013-07-08T20:20:38+03:00</lastmod>
     </url>
     <url>
-        <loc>blog.titarenko.info/</loc>
+        <loc>http://blog.titarenko.info/</loc>
         <lastmod>2013-07-08T20:21:25+03:00</lastmod>
     </url>
 </urlset>

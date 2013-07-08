@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: XPath | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/xpath/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/xpath/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[XPath: Select Node with Child Containing Given Substring]]></title>
-    <link href="blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/"/>
+    <link href="http://blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/"/>
     <updated>2012-04-04T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring</id>
+    <id>http://blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring</id>
     <content type="html"><![CDATA[<p>XPath is very interesting topic, essentially it allows you to do quite sophisticated things. And in this short post, I&rsquo;ll give example how to create a little more complex than plain query: it will return all books, which contains &ldquo;C++&rdquo; in any of its childrens' texts (please, see <a href="http://msdn.microsoft.com/en-us/library/windows/desktop/ms762271%28v=vs.85%29.aspx">example of such XML here</a>).</p>
 
 <p>So, our query is following:</p>
@@ -51,9 +51,9 @@ environment.&lt;/description&gt;
   
   <entry>
     <title type="html"><![CDATA[Dealing with Namespaces in XPath (.NET)]]></title>
-    <link href="blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/"/>
+    <link href="http://blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/"/>
     <updated>2012-04-04T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net</id>
+    <id>http://blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net</id>
     <content type="html"><![CDATA[<p>This post is kind of short but useful note for those who are dealing with namespaces in XPath, especially if there is default namespace (with empty prefix).</p>
 
 <p>Normally, when doing queries to document <em>with namespaces</em>, you involve <code>XmlNamespaceManager</code> like this:</p>
@@ -108,9 +108,9 @@ var nodes = document.SelectNodes(&ldquo;//default:node/default:subnode&rdquo;, n
   
   <entry>
     <title type="html"><![CDATA[Extracting Tables from Microsoft Word 2007+ (OpenXML) Document]]></title>
-    <link href="blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/"/>
+    <link href="http://blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/"/>
     <updated>2012-04-03T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document</id>
+    <id>http://blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s suppose we have huge Word 2007+ document (*.docx) with lots of tables and we want to extract that information for further processing. Since our document is based on OpenXML format I would say &ldquo;No problem! Let&rsquo;s do it!&rdquo;.</p>
 
 <p>First, we need to open zip archive (each *.docx is zipped set of XML files). For this purpose we can use great library DotNetZip (just use NuGet to obtain it). Right after this we&rsquo;ll read word/document.xml entry.</p>

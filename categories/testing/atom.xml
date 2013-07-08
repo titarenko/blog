@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Testing | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/testing/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/testing/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[BDD with SpecFlow and WatiN]]></title>
-    <link href="blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/"/>
+    <link href="http://blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/"/>
     <updated>2012-03-24T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin</id>
+    <id>http://blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin</id>
     <content type="html"><![CDATA[<p>I&rsquo;ve long heard about BDD, and recently viewed lectures from <a href="http://saas-class.org">SaaS class</a> really interested me not only in Ruby (with such great frameworks as Rails and Cucumber), but also in practical use of this methodology in .NET, which is my main platform at the moment. So, I decided to try writing small web app using BDD approach assisted by SpecFlow tool for definition of features and latter execution of test based on them, and WatiN as tool which would help to grab content from browser to make assertions on expected results.</p>
 
 <p>Here is the feature file:</p>

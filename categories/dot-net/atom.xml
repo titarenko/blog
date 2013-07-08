@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: .NET | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/dot-net/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/dot-net/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ASP.NET MVC - Preparing for Deployment]]></title>
-    <link href="blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
+    <link href="http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
     <updated>2012-07-17T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
+    <id>http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
     <content type="html"><![CDATA[<p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
 
 <p>I found that msbuild itself allows to do packaging for deployment (but very few developers were recommending to use it for real-life deployment).</p>
@@ -42,9 +42,9 @@
   
   <entry>
     <title type="html"><![CDATA[NullReferenceException from the Entity Framework Core]]></title>
-    <link href="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
+    <link href="http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
     <updated>2012-06-10T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
+    <id>http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
     <content type="html"><![CDATA[<p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
 
 <p>```csharp
@@ -123,9 +123,9 @@ private IQueryable<T> QueryFilteredInternal<T>(params Expression&lt;Func&lt;T, o
   
   <entry>
     <title type="html"><![CDATA[Snapping To Grid]]></title>
-    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <link href="http://blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
     <updated>2012-05-22T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <id>http://blog.titarenko.info/2012/05/22/snapping-to-grid</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
 
 <p>```csharp
@@ -145,9 +145,9 @@ return step/2 &gt; remainder ? value - remainder : value + remainder;
   
   <entry>
     <title type="html"><![CDATA[ASP.NET File Upload Possible Issue]]></title>
-    <link href="blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
+    <link href="http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
     <updated>2012-05-22T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
+    <id>http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
     <content type="html"><![CDATA[<p>One of issues you can face when developing web application with use of ASP.NET MVC and IIS 7.5 is maximal request size. No doubt, after googling, you&rsquo;ll find that cause is request size limit, so you&rsquo;ll happily add to web.config following line and forget about this.</p>
 
 <p><code>xml
@@ -173,9 +173,9 @@ return step/2 &gt; remainder ? value - remainder : value + remainder;
   
   <entry>
     <title type="html"><![CDATA[When IList Has Indexer But Does Not Have Enumerator]]></title>
-    <link href="blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
+    <link href="http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/"/>
     <updated>2012-04-29T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
+    <id>http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator</id>
     <content type="html"><![CDATA[<p>What can you expect from type implementing <code>IList</code>? Surely, availability of enumerator, which give you a power of LINQ! But do not be so fast, sometimes this assumption can be wrong! For example, yesterday I&rsquo;ve found that some types in XAF (eXpress Application Framework by DevExpress) can implement <code>IList</code> having the indexer but at the same time no enumerator!</p>
 
 <p>Imagine you are implementing handler for some controller&rsquo;s action where you need to access all items from <code>ListView</code>:</p>

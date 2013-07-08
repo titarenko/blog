@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Python | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/python/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/python/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Inference of Random Value Distribution Formula]]></title>
-    <link href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
+    <link href="http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
     <updated>2012-02-29T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
+    <id>http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
     <content type="html"><![CDATA[<p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
 
 <p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>

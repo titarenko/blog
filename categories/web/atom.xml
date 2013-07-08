@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Web | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/web/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/web/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ASP.NET File Upload Possible Issue]]></title>
-    <link href="blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
+    <link href="http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/"/>
     <updated>2012-05-22T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
+    <id>http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue</id>
     <content type="html"><![CDATA[<p>One of issues you can face when developing web application with use of ASP.NET MVC and IIS 7.5 is maximal request size. No doubt, after googling, you&rsquo;ll find that cause is request size limit, so you&rsquo;ll happily add to web.config following line and forget about this.</p>
 
 <p><code>xml
@@ -43,9 +43,9 @@
   
   <entry>
     <title type="html"><![CDATA[Cookie Aware WebClient (.NET)]]></title>
-    <link href="blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
+    <link href="http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
     <updated>2012-02-20T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
+    <id>http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
     <content type="html"><![CDATA[<p>If you&rsquo;ve used WebClient to access protected content on some site, then you probably had dealt with <code>403</code> error <code>"Not authorized"</code>. In case if that site has used cookies for persisting of authentication state then most probable reason is that WebClient doesn&rsquo;t support managing cookies by default. However, this is a matter of few lines of code to implement the solution which is given above.</p>
 
 <p>```csharp

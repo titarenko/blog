@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Deployment | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/deployment/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/deployment/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[ASP.NET MVC - Preparing for Deployment]]></title>
-    <link href="blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
+    <link href="http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/"/>
     <updated>2012-07-17T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
+    <id>http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment</id>
     <content type="html"><![CDATA[<p>Development process of several of my pet projects reached stage when robust deployment process is needed. So, I decided to consider list of options and started googling.</p>
 
 <p>I found that msbuild itself allows to do packaging for deployment (but very few developers were recommending to use it for real-life deployment).</p>

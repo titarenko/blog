@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Snippet | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/snippet/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/snippet/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Snapping To Grid]]></title>
-    <link href="blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
+    <link href="http://blog.titarenko.info/2012/05/22/snapping-to-grid/"/>
     <updated>2012-05-22T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/05/22/snapping-to-grid</id>
+    <id>http://blog.titarenko.info/2012/05/22/snapping-to-grid</id>
     <content type="html"><![CDATA[<p>Let&rsquo;s suppose user selects some value (real number) and you need to snap it to nearest point on discrete axis. No problem!</p>
 
 <p>```csharp
@@ -37,9 +37,9 @@ return step/2 &gt; remainder ? value - remainder : value + remainder;
   
   <entry>
     <title type="html"><![CDATA[Inference of Random Value Distribution Formula]]></title>
-    <link href="blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
+    <link href="http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/"/>
     <updated>2012-02-29T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
+    <id>http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula</id>
     <content type="html"><![CDATA[<p><em>This post is just reflection of mind mechanics, which can be useful for ones studying or interested in math.</em></p>
 
 <p>Watching Central Limit Theorem lecture (suddenly I enrolled Model Thinking class), I wished to generalize model of coin flipping and get common formula for distribution of random value described below.</p>
@@ -121,9 +121,9 @@ Q(5) = C(5,5) = 1
   
   <entry>
     <title type="html"><![CDATA[Cookie Aware WebClient (.NET)]]></title>
-    <link href="blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
+    <link href="http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/"/>
     <updated>2012-02-20T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
+    <id>http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net</id>
     <content type="html"><![CDATA[<p>If you&rsquo;ve used WebClient to access protected content on some site, then you probably had dealt with <code>403</code> error <code>"Not authorized"</code>. In case if that site has used cookies for persisting of authentication state then most probable reason is that WebClient doesn&rsquo;t support managing cookies by default. However, this is a matter of few lines of code to implement the solution which is given above.</p>
 
 <p>```csharp
@@ -165,9 +165,9 @@ protected override WebResponse GetWebResponse(WebRequest request)
   
   <entry>
     <title type="html"><![CDATA[Useful Information In Exceptions]]></title>
-    <link href="blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
+    <link href="http://blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
     <updated>2011-11-12T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
+    <id>http://blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
     <content type="html"><![CDATA[<p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
 
 <p>```cpp
@@ -233,9 +233,9 @@ Error! (d:\projects\test\main.cpp: 22, built at Nov 12 2011 13:51:15)
   
   <entry>
     <title type="html"><![CDATA[Tracing C++ Code Execution]]></title>
-    <link href="blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
+    <link href="http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
     <updated>2011-11-12T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
+    <id>http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
     <content type="html"><![CDATA[<p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
 
 <p>```cpp</p>

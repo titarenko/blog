@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: CUDA | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/cuda/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/cuda/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[CUDA Vector Implementation]]></title>
-    <link href="blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
+    <link href="http://blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
     <updated>2011-10-05T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2011/10/05/cuda-cuvec</id>
+    <id>http://blog.titarenko.info/2011/10/05/cuda-cuvec</id>
     <content type="html"><![CDATA[<p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
 
 <p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>

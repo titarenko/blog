@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: C++ | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/c-plus-plus/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Useful Information In Exceptions]]></title>
-    <link href="blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
+    <link href="http://blog.titarenko.info/2011/11/12/useful-info-inexceptions/"/>
     <updated>2011-11-12T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
+    <id>http://blog.titarenko.info/2011/11/12/useful-info-inexceptions</id>
     <content type="html"><![CDATA[<p>Developing image fusion software under my master&rsquo;s work, I do specific assumptions on image channel size, minimal required memory size, etc. And if something goes wrong, the best way is to throw exception :). So, here is some kind of helper for including useful information (besides message itself)  to exception.</p>
 
 <p>```cpp
@@ -83,9 +83,9 @@ Error! (d:\projects\test\main.cpp: 22, built at Nov 12 2011 13:51:15)
   
   <entry>
     <title type="html"><![CDATA[Tracing C++ Code Execution]]></title>
-    <link href="blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
+    <link href="http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/"/>
     <updated>2011-11-12T00:00:00+02:00</updated>
-    <id>blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
+    <id>http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution</id>
     <content type="html"><![CDATA[<p>Sometimes it&rsquo;s quite handy to see what is being executed and how much time does it take. OK, so lets define several helpers in order to have that thing (here I assume you do not have advanced tools for profiling).</p>
 
 <p>```cpp</p>
@@ -299,9 +299,9 @@ TRACE_END
   
   <entry>
     <title type="html"><![CDATA[CUDA Vector Implementation]]></title>
-    <link href="blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
+    <link href="http://blog.titarenko.info/2011/10/05/cuda-cuvec/"/>
     <updated>2011-10-05T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2011/10/05/cuda-cuvec</id>
+    <id>http://blog.titarenko.info/2011/10/05/cuda-cuvec</id>
     <content type="html"><![CDATA[<p>Dealing with CUDA, you probably noticed how tedious are memory management operations. So, here is my way to get rid of boring things.</p>
 
 <p>Which data structure is widely used while developing with CUDA? Vector (or linear array) &ndash; no doubt! OK, so let&rsquo;s create our CUDA-aware vector.</p>

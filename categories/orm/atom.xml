@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: ORM | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/orm/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/orm/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[NullReferenceException from the Entity Framework Core]]></title>
-    <link href="blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
+    <link href="http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/"/>
     <updated>2012-06-10T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
+    <id>http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core</id>
     <content type="html"><![CDATA[<p>Running web application with Entity Framework 4.3 I got very strange (at first glance) exception saying: <code>"Object reference not set to an instance of an object."</code>. Following is the controller action caused this error:</p>
 
 <p>```csharp

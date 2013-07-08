@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Thoughts | Constantin Titarenko's Blog]]></title>
-  <link href="blog.titarenko.info/categories/thoughts/atom.xml" rel="self"/>
-  <link href="blog.titarenko.info/"/>
-  <updated>2013-07-08T20:39:33+03:00</updated>
-  <id>blog.titarenko.info/</id>
+  <link href="http://blog.titarenko.info/categories/thoughts/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-08T20:45:47+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Why Programmer Must Have Math Background]]></title>
-    <link href="blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/"/>
+    <link href="http://blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/"/>
     <updated>2012-10-05T00:00:00+03:00</updated>
-    <id>blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background</id>
+    <id>http://blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background</id>
     <content type="html"><![CDATA[<p>Now I definitely sure that each programmer (or software developer, or software engineer, call he/she as you want) <strong>must</strong> have math background.</p>
 
 <p>Lack of analytical skills will lead to unclear, tangled, repetitious, inconsistent code.</p>
