@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Constantin Titarenko's Blog]]></title>
+  <link href="http://blog.titarenko.info/categories/git/atom.xml" rel="self"/>
+  <link href="http://blog.titarenko.info/"/>
+  <updated>2013-07-09T23:35:41+03:00</updated>
+  <id>http://blog.titarenko.info/</id>
+  <author>
+    <name><![CDATA[Constantin Titarenko]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[What Have I Done During Last Week?]]></title>
+    <link href="http://blog.titarenko.info/2013/07/09/what-have-i-done-during-last-week/"/>
+    <updated>2013-07-09T23:24:00+03:00</updated>
+    <id>http://blog.titarenko.info/2013/07/09/what-have-i-done-during-last-week</id>
+    <content type="html"><![CDATA[<p>While being in a state of active development, you really can be confused by a question: &ldquo;What have you done during last week?&rdquo;. You are focused on current task, so obviously you are out of context of previous tasks &ndash; this is OK.</p>
+
+<p>Anyway, since you are using Git, it&rsquo;s extremely easy to answer initial question:</p>
+
+<p><code>bash
+git log --since="2013-06-23" --until="2013-06-29" --author="Constantin Titarenko" --pretty="%ad %s"
+</code></p>
+
+<p>This command will yield something like this:</p>
+
+<p><code>
+Sat Jun 29 12:51:32 2013 +0300 Fixed spelling.
+Sat Jun 29 12:49:31 2013 +0300 Translated comments template to Russian.
+Sat Jun 29 12:48:59 2013 +0300 Russian date format.
+...
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

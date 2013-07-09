@@ -4,7 +4,7 @@
   <title><![CDATA[Constantin Titarenko's Blog]]></title>
   <link href="http://blog.titarenko.info/atom.xml" rel="self"/>
   <link href="http://blog.titarenko.info/"/>
-  <updated>2013-07-08T20:45:47+03:00</updated>
+  <updated>2013-07-09T23:35:41+03:00</updated>
   <id>http://blog.titarenko.info/</id>
   <author>
     <name><![CDATA[Constantin Titarenko]]></name>
@@ -14,19 +14,33 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Why Programmer Must Have Math Background]]></title>
-    <link href="http://blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background/"/>
-    <updated>2012-10-05T00:00:00+03:00</updated>
-    <id>http://blog.titarenko.info/2012/10/05/why-programmer-must-have-math-background</id>
-    <content type="html"><![CDATA[<p>Now I definitely sure that each programmer (or software developer, or software engineer, call he/she as you want) <strong>must</strong> have math background.</p>
+    <title type="html"><![CDATA[What Have I Done During Last Week?]]></title>
+    <link href="http://blog.titarenko.info/2013/07/09/what-have-i-done-during-last-week/"/>
+    <updated>2013-07-09T23:24:00+03:00</updated>
+    <id>http://blog.titarenko.info/2013/07/09/what-have-i-done-during-last-week</id>
+    <content type="html"><![CDATA[<p>While being in a state of active development, you really can be confused by a question: &ldquo;What have you done during last week?&rdquo;. You are focused on current task, so obviously you are out of context of previous tasks &ndash; this is OK.</p>
 
-<p>Lack of analytical skills will lead to unclear, tangled, repetitious, inconsistent code.</p>
+<p>Anyway, since you are using Git, it&rsquo;s extremely easy to answer initial question:</p>
 
-<p>Let&rsquo;s consider simple example &ndash; from web development area (which is believed to be not so complicated, although this is, of course, arguable) &ndash; we have several custom controls which are based on same HTML elements which are, in their turn, transformed into aforementioned controls by applying to them some jQuery plugin. Person without, so to say, &ldquo;pattern recognition&rdquo; skill will code something like this on different pages: <code>$("#cars").slider()</code>, <code>$("#bikes").slider()</code> and so on, instead of just writing <code>$(".slider").slider()</code>.</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>git log --since<span class="o">=</span><span class="s2">&quot;2013-06-23&quot;</span> --until<span class="o">=</span><span class="s2">&quot;2013-06-29&quot;</span> --author<span class="o">=</span><span class="s2">&quot;Constantin Titarenko&quot;</span> --pretty<span class="o">=</span><span class="s2">&quot;%ad %s&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
 
-<p>More depressing case is when it comes to design &ndash; you&rsquo;ll see lots of similar code snippets (with only slight differences which can be eliminated via parameterizing). Of course, even experienced developers can end up with unclear architecture, but this is definitely easier when they do not have analytical skills which are developed, I strongly believe, while doing math excercises.</p>
 
-<p>Maybe you&rsquo;ve already considered me to be Captain Obvious, but, since I still can hear from here and there: &ldquo;Why do I need to do these stupid exercises in algebra/trigonometry/differential calculus/your option instead of just learning jQuery?&rdquo; I think this post to some extent can be useful.</p>
+<p></p>
+
+<p>This command will yield something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>Sat Jun 29 12:51:32 2013 +0300 Fixed spelling.
+</span><span class='line'>Sat Jun 29 12:49:31 2013 +0300 Translated comments template to Russian.
+</span><span class='line'>Sat Jun 29 12:48:59 2013 +0300 Russian date format.
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
 ]]></content>
   </entry>
   
