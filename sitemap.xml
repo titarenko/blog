@@ -2,89 +2,89 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://blog.titarenko.info/2011/10/05/cuda-cuvec/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2011/11/12/tracing-of-c-code-execution/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2011/11/12/useful-info-inexceptions/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/02/08/what-assembly-dll-is-missing/</loc>
-        <lastmod>2013-07-08T20:21:24+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/02/20/cookie-aware-webclient-net/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.titarenko.info/2012/02/29/inference-of-random-value-distribution-formula/
         </loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/03/24/bdd-with-specflow-and-watin/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.titarenko.info/2012/04/03/extracting-tables-from-microsoft-word-2007-openxml-document/
         </loc>
-        <lastmod>2013-07-08T20:21:24+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/04/04/dealing-with-namespaces-in-xpath-net/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.titarenko.info/2012/04/04/xpath-select-node-with-child-containing-given-substring/
         </loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.titarenko.info/2012/04/29/when-ilist-has-indexer-but-does-not-have-enumerator/
         </loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/05/22/asp-net-file-upload-possible-issue/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/05/22/snapping-to-grid/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>
             http://blog.titarenko.info/2012/06/10/nullreferenceexception-from-the-entity-framework-core/
         </loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2012/07/17/asp-net-mvc-preparing-for-deployment/</loc>
-        <lastmod>2013-07-08T20:21:25+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/2013/07/09/what-have-i-done-during-last-week/</loc>
-        <lastmod>2013-07-09T23:35:29+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/blog/archives/</loc>
-        <lastmod>2013-07-09T23:35:29+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/blog/</loc>
-        <lastmod>2013-07-09T23:35:29+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/404.html</loc>
-        <lastmod>2013-07-08T20:20:38+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
     <url>
         <loc>http://blog.titarenko.info/robots.txt</loc>
@@ -92,6 +92,6 @@
     </url>
     <url>
         <loc>http://blog.titarenko.info/</loc>
-        <lastmod>2013-07-09T23:35:29+03:00</lastmod>
+        <lastmod>2013-08-16T20:48:35+03:00</lastmod>
     </url>
 </urlset>
